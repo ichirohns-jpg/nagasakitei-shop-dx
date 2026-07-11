@@ -391,8 +391,15 @@ main{
 .menu-image{
   width:100%;
   height:245px;
-  object-fit:cover;
   background:#eadbbd;
+  background-image:url("banner-main.png?v=6");
+  background-repeat:no-repeat;
+  background-size:300% auto;
+  background-position:left 75%;
+}
+
+.menu-image.saraudon-image{
+  background-position:right 75%;
 }
 
 .menu-content{
@@ -914,12 +921,11 @@ main{
 
     <article class="menu-card">
 
-      <img
-        class="menu-image"
-        src="menu-champon.png"
-        alt="長崎亭の長崎ちゃんぽん"
-        onerror="this.onerror=null;this.src='menu-saraudon.png'"
-      >
+      <div
+        class="menu-image champon-image"
+        role="img"
+        aria-label="長崎亭の長崎ちゃんぽん"
+      ></div>
 
       <div class="menu-content">
 
@@ -941,11 +947,11 @@ main{
 
     <article class="menu-card">
 
-      <img
-        class="menu-image"
-        src="menu-saraudon.png"
-        alt="長崎亭の長崎皿うどん"
-      >
+      <div
+        class="menu-image saraudon-image"
+        role="img"
+        aria-label="長崎亭の長崎皿うどん"
+      ></div>
 
       <div class="menu-content">
 
@@ -1191,7 +1197,7 @@ main{
 <script>
 
 const GAS_URL =
-  "https://script.google.com/macros/s/AKfycbz77QIYPX0z4er8nRAMhP5FK3E3xB1ib0pPObaSIEbj99Z7dK4BZ-q5H5SQ0MX7p_tm4Q/exec";
+  "https://script.google.com/macros/s/AKfycbyC5VN3w3hDcJB13eK9YL9x5ulg7T-P3h0hpo5eLm7i6js4uOJ731pP0QMCAigCxGTyBQ/exec";
 
 const SITE_URL =
   "https://ichirohns-jpg.github.io/nagasakitei-shop-dx/";
