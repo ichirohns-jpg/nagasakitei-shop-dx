@@ -865,16 +865,16 @@
 
 <script>
   const GAS_URL =
-    "https://script.google.com/macros/s/AKfycbz77QIYPX0z4er8nRAMhP5FK3E3xB1ib0pPObaSIEbj99Z7dK4BZ-q5H5SQ0MX7p_tm4Q/exec";
+    "https://script.google.com/macros/s/AKfycbyC5VN3w3hDcJB13eK9YL9x5ulg7T-P3h0hpo5eLm7i6js4uOJ731pP0QMCAigCxGTyBQ/exec";
 
   const MAX_PHOTOS = 5;
 
   const MAX_ORIGINAL_FILE_SIZE =
     20 * 1024 * 1024;
 
-  const MAX_IMAGE_WIDTH = 1600;
+  const MAX_IMAGE_WIDTH = 1280;
 
-  const JPEG_QUALITY = 0.78;
+  const JPEG_QUALITY = 0.72;
 
   let selectedFiles = [];
 
@@ -1393,73 +1393,20 @@
 
       };
 
-      const response =
-        await fetch(
-          GAS_URL,
-          {
-            method:
-              "POST",
-
-            headers: {
-              "Content-Type":
-                "text/plain;charset=utf-8"
-            },
-
-            body:
-              JSON.stringify(
-                requestData
-              ),
-
-            redirect:
-              "follow"
-          }
-        );
-
-      if (!response.ok) {
-
-        throw new Error(
-          "通信エラーが発生しました。"
-        );
-
-      }
-
-      const responseText =
-        await response.text();
-
-      let result;
-
-      try {
-
-        result =
-          JSON.parse(
-            responseText
-          );
-
-      } catch (error) {
-
-        throw new Error(
-          "サーバーから正しい返答を受け取れませんでした。"
-        );
-
-      }
-
-      if (
-        !result ||
-        result.success !== true
-      ) {
-
-        throw new Error(
-          result &&
-          result.message
-            ? result.message
-            : "投稿の保存に失敗しました。"
-        );
-
-      }
-
-      showSuccess(
-        result
+      await fetch(
+        GAS_URL,
+        {
+          method: "POST",
+          mode: "no-cors",
+          credentials: "omit",
+          cache: "no-store",
+          body: JSON.stringify(
+            requestData
+          )
+        }
       );
+
+      showSuccess({});
 
     } catch (error) {
 
