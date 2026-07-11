@@ -1099,7 +1099,7 @@ main{
 
     <a
       class="map-button"
-      href="https://www.google.com/maps/dir/?api=1&destination=%E9%95%B7%E5%B4%8E%E4%BA%AD%20%E5%9F%BC%E7%8E%89%E7%9C%8C%E5%BF%97%E6%9C%A8%E5%B8%82%E6%9C%AC%E7%94%BA5-4-31"
+      href="https://www.google.com/maps/dir/?api=1&destination=%E9%95%B7%E5%B4%8E%E4%BA%AD%20%E5%9F%BC%E7%8E%89%E7%9C%8C%E5%BF%97%E6%9C%A8%E5%B8%825-4-31"
       target="_blank"
       rel="noopener"
     >
@@ -1129,7 +1129,7 @@ main{
     <iframe
       title="長崎亭のGoogleマップ"
       loading="lazy"
-      src="https://www.google.com/maps?q=%E9%95%B7%E5%B4%8E%E4%BA%AD%20%E5%9F%BC%E7%8E%89%E7%9C%8C%E5%BF%97%E6%9C%A8%E5%B8%82%E6%9C%AC%E7%94%BA5-4-31&output=embed"
+      src="https://www.google.com/maps?q=%E9%95%B7%E5%B4%8E%E4%BA%AD%20%E5%9F%BC%E7%8E%89%E7%9C%8C%E5%BF%97%E6%9C%A8%E5%B8%825-4-31&output=embed"
     ></iframe>
 
   </div>
@@ -1203,6 +1203,10 @@ const GAS_URL =
 
 const SITE_URL =
   "https://ichirohns-jpg.github.io/nagasakitei-shop-dx/";
+
+const SHARE_IMAGE_URL =
+  SITE_URL +
+  "banner-main.png?v=6";
 
 const SHARE_TEXT =
   "志木市の老舗・長崎亭を地域のみんなで応援するページです。";
@@ -1830,7 +1834,7 @@ async function shareSite(){
 
     try{
 
-      await navigator.share({
+      const shareData = {
         title:
           "長崎亭｜地域のお店応援DX",
 
@@ -1839,7 +1843,53 @@ async function shareSite(){
 
         url:
           SITE_URL
-      });
+      };
+
+      try{
+
+        const imageResponse =
+          await fetch(
+            SHARE_IMAGE_URL,
+            {
+              cache:"no-store"
+            }
+          );
+
+        if(
+          imageResponse.ok &&
+          typeof File !== "undefined"
+        ){
+
+          const imageBlob =
+            await imageResponse.blob();
+
+          const imageFile =
+            new File(
+              [imageBlob],
+              "nagasakitei-share.png",
+              {
+                type:
+                  imageBlob.type ||
+                  "image/png"
+              }
+            );
+
+          if(
+            navigator.canShare &&
+            navigator.canShare({
+              files:[imageFile]
+            })
+          ){
+            shareData.files = [imageFile];
+          }
+
+        }
+
+      }catch(imageError){
+        // 画像取得に失敗した場合は、URL共有へ自動で切り替えます。
+      }
+
+      await navigator.share(shareData);
 
       return;
 
