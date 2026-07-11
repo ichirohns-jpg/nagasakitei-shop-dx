@@ -1,0 +1,1246 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, viewport-fit=cover"
+  >
+
+  <meta
+    name="description"
+    content="長崎亭の料理写真・星評価・応援コメントを投稿するページです。"
+  >
+
+  <meta name="theme-color" content="#7b1717">
+
+  <title>写真・口コミを投稿｜長崎亭</title>
+
+  <link
+    rel="icon"
+    type="image/png"
+    href="アプリアイコン.png"
+  >
+
+  <link
+    rel="apple-touch-icon"
+    href="アプリアイコン.png"
+  >
+
+  <style>
+    :root {
+      --wine: #7b1717;
+      --wine-dark: #4b0d0d;
+      --wine-light: #ad3028;
+      --cream: #fff8e8;
+      --cream-dark: #f2dfb4;
+      --yellow: #f6c85f;
+      --brown: #4b2a18;
+      --green: #247648;
+      --text: #2d2118;
+      --gray: #71675f;
+      --white: #ffffff;
+      --border: #dfca9c;
+      --danger: #b42318;
+      --shadow: 0 8px 24px rgba(66, 34, 13, 0.13);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background:
+        radial-gradient(
+          circle at top,
+          #fffdf7 0,
+          var(--cream) 45%,
+          #f1e3c8 100%
+        );
+      color: var(--text);
+      font-family:
+        "Hiragino Sans",
+        "Yu Gothic",
+        "Meiryo",
+        sans-serif;
+      font-size: 18px;
+      line-height: 1.7;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    button,
+    input,
+    textarea,
+    select {
+      font: inherit;
+    }
+
+    button,
+    label,
+    a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    .page {
+      width: min(100%, 720px);
+      min-height: 100vh;
+      margin: 0 auto;
+      background: rgba(255, 253, 247, 0.96);
+      box-shadow: 0 0 32px rgba(56, 27, 11, 0.13);
+    }
+
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding:
+        calc(10px + env(safe-area-inset-top))
+        14px
+        10px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--white);
+      background: rgba(76, 12, 12, 0.98);
+      border-bottom: 3px solid var(--yellow);
+      backdrop-filter: blur(10px);
+    }
+
+    .back-button {
+      min-width: 52px;
+      min-height: 52px;
+      padding: 8px 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 15px;
+      color: var(--wine-dark);
+      background: #ffe4a1;
+      text-decoration: none;
+      font-size: 25px;
+      font-weight: 900;
+    }
+
+    .header-title {
+      margin: 0;
+      font-size: 21px;
+      line-height: 1.3;
+      font-weight: 900;
+    }
+
+    .header-sub {
+      margin: 2px 0 0;
+      color: #ffe5a0;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    main {
+      padding: 18px 14px 60px;
+    }
+
+    .intro {
+      padding: 20px 17px;
+      border-radius: 22px;
+      color: var(--white);
+      background:
+        linear-gradient(
+          135deg,
+          var(--wine-dark),
+          var(--wine),
+          #9b3024
+        );
+      box-shadow: var(--shadow);
+    }
+
+    .intro h1 {
+      margin: 0;
+      color: #fff3c7;
+      font-size: 26px;
+      line-height: 1.45;
+      text-align: center;
+    }
+
+    .intro p {
+      margin: 10px 0 0;
+      font-size: 16px;
+      line-height: 1.8;
+    }
+
+    .notice {
+      margin-top: 13px;
+      padding: 12px 14px;
+      border-radius: 14px;
+      color: #5e3e1f;
+      background: #fff0be;
+      border: 1px solid #e5c268;
+      font-size: 15px;
+      font-weight: 800;
+    }
+
+    .form-card {
+      margin-top: 18px;
+      padding: 20px 16px;
+      border-radius: 23px;
+      background: var(--white);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+    }
+
+    .field {
+      margin-bottom: 23px;
+    }
+
+    .field:last-child {
+      margin-bottom: 0;
+    }
+
+    .label {
+      display: block;
+      margin-bottom: 9px;
+      color: var(--wine-dark);
+      font-size: 19px;
+      font-weight: 900;
+    }
+
+    .required {
+      display: inline-block;
+      margin-left: 7px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      color: var(--white);
+      background: var(--danger);
+      font-size: 12px;
+      vertical-align: middle;
+    }
+
+    .optional {
+      display: inline-block;
+      margin-left: 7px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      color: #604f41;
+      background: #eadfc8;
+      font-size: 12px;
+      vertical-align: middle;
+    }
+
+    .help {
+      margin: 7px 0 0;
+      color: var(--gray);
+      font-size: 14px;
+      line-height: 1.65;
+    }
+
+    input[type="text"],
+    textarea {
+      width: 100%;
+      min-height: 58px;
+      padding: 14px;
+      color: var(--text);
+      background: #fffdf8;
+      border: 2px solid #d8c498;
+      border-radius: 15px;
+      font-size: 18px;
+      outline: none;
+    }
+
+    textarea {
+      min-height: 150px;
+      resize: vertical;
+      line-height: 1.7;
+    }
+
+    input[type="text"]:focus,
+    textarea:focus {
+      border-color: var(--wine);
+      box-shadow: 0 0 0 4px rgba(123, 23, 23, 0.12);
+    }
+
+    .photo-button {
+      width: 100%;
+      min-height: 72px;
+      padding: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border: 3px dashed #bb873b;
+      border-radius: 18px;
+      color: var(--wine-dark);
+      background: #fff3cf;
+      font-size: 19px;
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    #photoInput {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .preview-grid {
+      margin-top: 13px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    .preview-card {
+      position: relative;
+      overflow: hidden;
+      min-height: 150px;
+      border-radius: 15px;
+      background: #eee2ca;
+      border: 1px solid var(--border);
+    }
+
+    .preview-image {
+      width: 100%;
+      height: 170px;
+      object-fit: cover;
+    }
+
+    .remove-photo {
+      position: absolute;
+      top: 7px;
+      right: 7px;
+      width: 40px;
+      height: 40px;
+      padding: 0;
+      border: 2px solid var(--white);
+      border-radius: 50%;
+      color: var(--white);
+      background: rgba(120, 16, 16, 0.9);
+      font-size: 21px;
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    .stars {
+      display: flex;
+      justify-content: center;
+      gap: 5px;
+      padding: 13px 5px;
+      border-radius: 17px;
+      background: #fff8e5;
+      border: 1px solid #ead3a0;
+    }
+
+    .star-button {
+      width: 52px;
+      min-height: 58px;
+      padding: 0;
+      border: 0;
+      color: #c7b99b;
+      background: transparent;
+      font-size: 43px;
+      line-height: 1;
+      cursor: pointer;
+    }
+
+    .star-button.selected {
+      color: #eba600;
+      text-shadow: 0 2px 3px rgba(103, 61, 0, 0.2);
+    }
+
+    .rating-text {
+      margin: 7px 0 0;
+      text-align: center;
+      color: var(--wine-dark);
+      font-size: 16px;
+      font-weight: 900;
+    }
+
+    .confirm-box {
+      padding: 15px;
+      border-radius: 16px;
+      background: #f8f3e8;
+      border: 1px solid #ded1b7;
+    }
+
+    .check-label {
+      display: flex;
+      align-items: flex-start;
+      gap: 11px;
+      cursor: pointer;
+    }
+
+    .check-label input {
+      width: 27px;
+      height: 27px;
+      flex: 0 0 27px;
+      margin-top: 2px;
+      accent-color: var(--wine);
+    }
+
+    .check-text {
+      font-size: 15px;
+      line-height: 1.65;
+    }
+
+    .submit-button {
+      width: 100%;
+      min-height: 70px;
+      margin-top: 18px;
+      padding: 15px 18px;
+      border: 3px solid #f3cd69;
+      border-radius: 20px;
+      color: var(--white);
+      background:
+        linear-gradient(
+          135deg,
+          var(--wine-light),
+          var(--wine-dark)
+        );
+      box-shadow: 0 8px 20px rgba(84, 18, 13, 0.25);
+      font-size: 21px;
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    .submit-button:disabled {
+      color: #ddd4c8;
+      background: #8b7e72;
+      border-color: #b6aa9e;
+      box-shadow: none;
+      cursor: not-allowed;
+    }
+
+    .status {
+      display: none;
+      margin-top: 16px;
+      padding: 15px;
+      border-radius: 15px;
+      text-align: center;
+      font-size: 16px;
+      font-weight: 900;
+    }
+
+    .status.show {
+      display: block;
+    }
+
+    .status.error {
+      color: #821a14;
+      background: #ffe3df;
+      border: 1px solid #e6aaa4;
+    }
+
+    .status.success {
+      color: #135c37;
+      background: #e2f6e9;
+      border: 1px solid #9ed5b3;
+    }
+
+    .success-card {
+      display: none;
+      margin-top: 18px;
+      padding: 24px 18px;
+      border-radius: 23px;
+      text-align: center;
+      background: var(--white);
+      border: 2px solid #9acdaf;
+      box-shadow: var(--shadow);
+    }
+
+    .success-card.show {
+      display: block;
+    }
+
+    .success-icon {
+      font-size: 54px;
+      line-height: 1;
+    }
+
+    .success-title {
+      margin: 10px 0 8px;
+      color: var(--green);
+      font-size: 25px;
+      font-weight: 900;
+    }
+
+    .success-text {
+      margin: 0;
+      font-size: 16px;
+      line-height: 1.8;
+    }
+
+    .home-button {
+      width: 100%;
+      min-height: 60px;
+      margin-top: 16px;
+      padding: 13px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 17px;
+      color: var(--white);
+      background: var(--green);
+      text-decoration: none;
+      font-size: 18px;
+      font-weight: 900;
+    }
+
+    .footer {
+      padding:
+        25px
+        15px
+        calc(25px + env(safe-area-inset-bottom));
+      text-align: center;
+      color: #f9e7bc;
+      background: var(--wine-dark);
+      font-size: 14px;
+    }
+
+    @media (min-width: 600px) {
+      .preview-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="page">
+
+  <header class="header">
+    <a
+      class="back-button"
+      href="index.html"
+      aria-label="トップページへ戻る"
+    >
+      ←
+    </a>
+
+    <div>
+      <p class="header-title">
+        写真・口コミを投稿
+      </p>
+
+      <p class="header-sub">
+        長崎亭を地域のみんなで応援
+      </p>
+    </div>
+  </header>
+
+  <main>
+
+    <section class="intro">
+      <h1>
+        あなたの写真と一言が<br>
+        お店の応援になります
+      </h1>
+
+      <p>
+        長崎亭で撮影した料理写真や店内写真と、
+        星評価・応援コメントをお寄せください。
+      </p>
+
+      <div class="notice">
+        投稿は管理者または店主が内容を確認したあとに公開されます。
+      </div>
+    </section>
+
+    <form
+      class="form-card"
+      id="postForm"
+      novalidate
+    >
+
+      <div class="field">
+
+        <label class="label">
+          写真
+          <span class="required">必須</span>
+        </label>
+
+        <label
+          class="photo-button"
+          for="photoInput"
+        >
+          📷 カメラロールから写真を選ぶ
+        </label>
+
+        <input
+          id="photoInput"
+          name="photos"
+          type="file"
+          accept="image/*"
+          multiple
+        >
+
+        <p class="help">
+          料理・店内・外観などの写真を最大5枚まで選べます。
+        </p>
+
+        <div
+          class="preview-grid"
+          id="previewGrid"
+        ></div>
+
+      </div>
+
+      <div class="field">
+
+        <span class="label">
+          星評価
+          <span class="required">必須</span>
+        </span>
+
+        <div
+          class="stars"
+          id="stars"
+          role="radiogroup"
+          aria-label="星評価"
+        >
+
+          <button
+            class="star-button"
+            type="button"
+            data-value="1"
+            aria-label="星1つ"
+          >
+            ★
+          </button>
+
+          <button
+            class="star-button"
+            type="button"
+            data-value="2"
+            aria-label="星2つ"
+          >
+            ★
+          </button>
+
+          <button
+            class="star-button"
+            type="button"
+            data-value="3"
+            aria-label="星3つ"
+          >
+            ★
+          </button>
+
+          <button
+            class="star-button"
+            type="button"
+            data-value="4"
+            aria-label="星4つ"
+          >
+            ★
+          </button>
+
+          <button
+            class="star-button"
+            type="button"
+            data-value="5"
+            aria-label="星5つ"
+          >
+            ★
+          </button>
+
+        </div>
+
+        <p
+          class="rating-text"
+          id="ratingText"
+        >
+          星を押して評価してください
+        </p>
+
+        <input
+          id="rating"
+          name="rating"
+          type="hidden"
+          value=""
+        >
+
+      </div>
+
+      <div class="field">
+
+        <label
+          class="label"
+          for="nickname"
+        >
+          ニックネーム
+          <span class="required">必須</span>
+        </label>
+
+        <input
+          id="nickname"
+          name="nickname"
+          type="text"
+          maxlength="30"
+          autocomplete="nickname"
+          placeholder="例：志木のちゃんぽん好き"
+        >
+
+        <p class="help">
+          本名を入力する必要はありません。
+        </p>
+
+      </div>
+
+      <div class="field">
+
+        <label
+          class="label"
+          for="comment"
+        >
+          コメント
+          <span class="required">必須</span>
+        </label>
+
+        <textarea
+          id="comment"
+          name="comment"
+          maxlength="500"
+          placeholder="料理の感想、おすすめポイント、お店への応援メッセージなどをご記入ください。"
+        ></textarea>
+
+        <p
+          class="help"
+          id="commentCount"
+        >
+          0 / 500文字
+        </p>
+
+      </div>
+
+      <div class="field">
+
+        <label
+          class="label"
+          for="menuName"
+        >
+          写真の料理名
+          <span class="optional">任意</span>
+        </label>
+
+        <input
+          id="menuName"
+          name="menuName"
+          type="text"
+          maxlength="50"
+          placeholder="例：長崎ちゃんぽん"
+        >
+
+      </div>
+
+      <div class="field">
+
+        <div class="confirm-box">
+
+          <label class="check-label">
+
+            <input
+              id="agreement"
+              name="agreement"
+              type="checkbox"
+            >
+
+            <span class="check-text">
+              自分で撮影した写真、または掲載する権利のある写真です。
+              人物の顔や個人情報が写っている場合は、必要な許可を得ています。
+              投稿内容が長崎亭のお店応援DXやSNSで紹介されることに同意します。
+            </span>
+
+          </label>
+
+        </div>
+
+      </div>
+
+      <button
+        class="submit-button"
+        id="submitButton"
+        type="submit"
+      >
+        投稿内容を送信する
+      </button>
+
+      <div
+        class="status"
+        id="status"
+        role="status"
+        aria-live="polite"
+      ></div>
+
+    </form>
+
+    <section
+      class="success-card"
+      id="successCard"
+    >
+      <div class="success-icon">
+        ✅
+      </div>
+
+      <h2 class="success-title">
+        投稿を受け付けました
+      </h2>
+
+      <p class="success-text">
+        ありがとうございます。<br>
+        管理者または店主が確認したあと、
+        「みんなの写真・口コミ」に公開されます。
+      </p>
+
+      <a
+        class="home-button"
+        href="index.html"
+      >
+        長崎亭のトップページへ戻る
+      </a>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    長崎亭｜地域のお店応援DX
+  </footer>
+
+</div>
+
+<script>
+  const MAX_PHOTOS = 5;
+
+  const MAX_FILE_SIZE =
+    12 * 1024 * 1024;
+
+  let selectedFiles = [];
+
+  let selectedRating = 0;
+
+  const photoInput =
+    document.getElementById("photoInput");
+
+  const previewGrid =
+    document.getElementById("previewGrid");
+
+  const starButtons =
+    document.querySelectorAll(".star-button");
+
+  const ratingInput =
+    document.getElementById("rating");
+
+  const ratingText =
+    document.getElementById("ratingText");
+
+  const nicknameInput =
+    document.getElementById("nickname");
+
+  const commentInput =
+    document.getElementById("comment");
+
+  const commentCount =
+    document.getElementById("commentCount");
+
+  const menuNameInput =
+    document.getElementById("menuName");
+
+  const agreementInput =
+    document.getElementById("agreement");
+
+  const postForm =
+    document.getElementById("postForm");
+
+  const submitButton =
+    document.getElementById("submitButton");
+
+  const statusBox =
+    document.getElementById("status");
+
+  const successCard =
+    document.getElementById("successCard");
+
+  photoInput.addEventListener(
+    "change",
+    handlePhotoSelection
+  );
+
+  starButtons.forEach((button) => {
+    button.addEventListener(
+      "click",
+      () => {
+        setRating(
+          Number(button.dataset.value)
+        );
+      }
+    );
+  });
+
+  commentInput.addEventListener(
+    "input",
+    updateCommentCount
+  );
+
+  postForm.addEventListener(
+    "submit",
+    handleSubmit
+  );
+
+  function handlePhotoSelection(event) {
+    const incomingFiles =
+      Array.from(event.target.files || []);
+
+    statusBox.className = "status";
+    statusBox.textContent = "";
+
+    incomingFiles.forEach((file) => {
+      if (
+        selectedFiles.length >= MAX_PHOTOS
+      ) {
+        return;
+      }
+
+      if (
+        !file.type.startsWith("image/")
+      ) {
+        return;
+      }
+
+      if (
+        file.size > MAX_FILE_SIZE
+      ) {
+        showStatus(
+          "12MBを超える写真は追加できません。",
+          "error"
+        );
+
+        return;
+      }
+
+      const duplicate =
+        selectedFiles.some((selectedFile) => {
+          return (
+            selectedFile.name === file.name &&
+            selectedFile.size === file.size &&
+            selectedFile.lastModified ===
+              file.lastModified
+          );
+        });
+
+      if (!duplicate) {
+        selectedFiles.push(file);
+      }
+    });
+
+    if (
+      incomingFiles.length >
+      MAX_PHOTOS
+    ) {
+      showStatus(
+        "写真は最大5枚までです。",
+        "error"
+      );
+    }
+
+    syncPhotoInput();
+    renderPreviews();
+  }
+
+  function syncPhotoInput() {
+    const transfer =
+      new DataTransfer();
+
+    selectedFiles.forEach((file) => {
+      transfer.items.add(file);
+    });
+
+    photoInput.files =
+      transfer.files;
+  }
+
+  function renderPreviews() {
+    previewGrid.innerHTML = "";
+
+    selectedFiles.forEach(
+      (file, index) => {
+        const card =
+          document.createElement("div");
+
+        card.className =
+          "preview-card";
+
+        const image =
+          document.createElement("img");
+
+        image.className =
+          "preview-image";
+
+        image.alt =
+          "選択した写真 " +
+          (index + 1);
+
+        const objectUrl =
+          URL.createObjectURL(file);
+
+        image.src =
+          objectUrl;
+
+        image.addEventListener(
+          "load",
+          () => {
+            URL.revokeObjectURL(
+              objectUrl
+            );
+          }
+        );
+
+        const removeButton =
+          document.createElement("button");
+
+        removeButton.className =
+          "remove-photo";
+
+        removeButton.type =
+          "button";
+
+        removeButton.textContent =
+          "×";
+
+        removeButton.setAttribute(
+          "aria-label",
+          "写真を削除"
+        );
+
+        removeButton.addEventListener(
+          "click",
+          () => {
+            removePhoto(index);
+          }
+        );
+
+        card.appendChild(image);
+        card.appendChild(
+          removeButton
+        );
+
+        previewGrid.appendChild(card);
+      }
+    );
+  }
+
+  function removePhoto(index) {
+    selectedFiles.splice(
+      index,
+      1
+    );
+
+    syncPhotoInput();
+    renderPreviews();
+  }
+
+  function setRating(value) {
+    selectedRating = value;
+
+    ratingInput.value =
+      String(value);
+
+    starButtons.forEach(
+      (button) => {
+        const buttonValue =
+          Number(
+            button.dataset.value
+          );
+
+        button.classList.toggle(
+          "selected",
+          buttonValue <= value
+        );
+
+        button.setAttribute(
+          "aria-checked",
+          buttonValue === value
+            ? "true"
+            : "false"
+        );
+      }
+    );
+
+    const messages = {
+      1: "★ 率直なご意見",
+      2: "★★ もう少し",
+      3: "★★★ おいしかった",
+      4: "★★★★ とてもおすすめ",
+      5: "★★★★★ 大満足"
+    };
+
+    ratingText.textContent =
+      messages[value];
+  }
+
+  function updateCommentCount() {
+    commentCount.textContent =
+      commentInput.value.length +
+      " / 500文字";
+  }
+
+  function validateForm() {
+    if (
+      selectedFiles.length === 0
+    ) {
+      return "写真を1枚以上選んでください。";
+    }
+
+    if (
+      selectedRating < 1
+    ) {
+      return "星評価を選んでください。";
+    }
+
+    if (
+      nicknameInput.value.trim() === ""
+    ) {
+      return "ニックネームを入力してください。";
+    }
+
+    if (
+      commentInput.value.trim() === ""
+    ) {
+      return "コメントを入力してください。";
+    }
+
+    if (
+      !agreementInput.checked
+    ) {
+      return "写真と投稿内容の掲載について同意してください。";
+    }
+
+    return "";
+  }
+
+  async function handleSubmit(event) {
+    event.preventDefault();
+
+    const validationMessage =
+      validateForm();
+
+    if (validationMessage) {
+      showStatus(
+        validationMessage,
+        "error"
+      );
+
+      return;
+    }
+
+    submitButton.disabled = true;
+
+    submitButton.textContent =
+      "投稿内容を準備しています…";
+
+    statusBox.className = "status";
+    statusBox.textContent = "";
+
+    try {
+      const postData = {
+        id:
+          "customer-" +
+          Date.now(),
+
+        createdAt:
+          new Date().toISOString(),
+
+        nickname:
+          nicknameInput.value.trim(),
+
+        rating:
+          selectedRating,
+
+        comment:
+          commentInput.value.trim(),
+
+        menuName:
+          menuNameInput.value.trim(),
+
+        photoCount:
+          selectedFiles.length,
+
+        status:
+          "pending"
+      };
+
+      localStorage.setItem(
+        "nagasakiteiPendingPost",
+        JSON.stringify(postData)
+      );
+
+      await wait(700);
+
+      postForm.style.display =
+        "none";
+
+      successCard.classList.add(
+        "show"
+      );
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+
+    } catch (error) {
+      showStatus(
+        "投稿の準備中にエラーが発生しました。もう一度お試しください。",
+        "error"
+      );
+
+      submitButton.disabled =
+        false;
+
+      submitButton.textContent =
+        "投稿内容を送信する";
+    }
+  }
+
+  function showStatus(
+    message,
+    type
+  ) {
+    statusBox.textContent =
+      message;
+
+    statusBox.className =
+      "status show " + type;
+
+    statusBox.scrollIntoView({
+      behavior: "smooth",
+      block: "center"
+    });
+  }
+
+  function wait(milliseconds) {
+    return new Promise(
+      (resolve) => {
+        window.setTimeout(
+          resolve,
+          milliseconds
+        );
+      }
+    );
+  }
+
+  updateCommentCount();
+</script>
+
+</body>
+</html>
