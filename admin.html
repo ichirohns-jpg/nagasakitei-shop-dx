@@ -1,0 +1,3260 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width,initial-scale=1,viewport-fit=cover"
+>
+
+<meta name="theme-color" content="#4b0d0d">
+
+<meta
+  name="robots"
+  content="noindex,nofollow,noarchive"
+>
+
+<title>管理者画面｜長崎亭</title>
+
+<link
+  rel="icon"
+  type="image/png"
+  href="app-icon.png?v=5"
+>
+
+<link
+  rel="apple-touch-icon"
+  href="app-icon.png?v=5"
+>
+
+<style>
+
+:root{
+  --wine:#7b1717;
+  --wine-dark:#4b0d0d;
+  --wine-light:#ad3028;
+  --cream:#fff8e8;
+  --yellow:#f6c85f;
+  --green:#247648;
+  --blue:#1769aa;
+  --gray:#71675f;
+  --text:#2d2118;
+  --white:#ffffff;
+  --border:#dfca9c;
+  --danger:#a51d18;
+  --shadow:0 8px 24px rgba(66,34,13,.13);
+}
+
+*{
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  color:var(--text);
+  background:
+    radial-gradient(
+      circle at top,
+      #fffdf7 0,
+      var(--cream) 45%,
+      #f1e3c8 100%
+    );
+  font-family:
+    "Hiragino Sans",
+    "Yu Gothic",
+    "Meiryo",
+    sans-serif;
+  font-size:18px;
+  line-height:1.7;
+  -webkit-text-size-adjust:100%;
+}
+
+button,
+input,
+textarea,
+select{
+  font:inherit;
+}
+
+button,
+a,
+label{
+  -webkit-tap-highlight-color:transparent;
+}
+
+button{
+  cursor:pointer;
+}
+
+img{
+  display:block;
+  max-width:100%;
+}
+
+.page{
+  width:min(100%,760px);
+  min-height:100vh;
+  margin:0 auto;
+  background:rgba(255,253,247,.97);
+  box-shadow:0 0 32px rgba(56,27,11,.13);
+}
+
+.header{
+  position:sticky;
+  top:0;
+  z-index:100;
+  padding:
+    calc(10px + env(safe-area-inset-top))
+    14px
+    10px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  color:var(--white);
+  background:rgba(76,12,12,.98);
+  border-bottom:3px solid var(--yellow);
+  backdrop-filter:blur(10px);
+}
+
+.back-button{
+  width:54px;
+  min-width:54px;
+  height:54px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:var(--wine-dark);
+  background:#ffe4a1;
+  border-radius:16px;
+  text-decoration:none;
+  font-size:25px;
+  font-weight:900;
+}
+
+.header-title{
+  margin:0;
+  font-size:22px;
+  line-height:1.3;
+  font-weight:900;
+}
+
+.header-sub{
+  margin:2px 0 0;
+  color:#ffe5a0;
+  font-size:13px;
+  font-weight:700;
+}
+
+main{
+  padding:18px 14px 70px;
+}
+
+.card{
+  padding:20px 16px;
+  background:var(--white);
+  border:1px solid var(--border);
+  border-radius:23px;
+  box-shadow:var(--shadow);
+}
+
+.login-card{
+  margin-top:20px;
+}
+
+.login-title{
+  margin:0;
+  color:var(--wine-dark);
+  text-align:center;
+  font-size:27px;
+  font-weight:900;
+}
+
+.login-text{
+  margin:9px 0 18px;
+  color:var(--gray);
+  text-align:center;
+  font-size:16px;
+}
+
+.field{
+  margin-bottom:20px;
+}
+
+.field:last-child{
+  margin-bottom:0;
+}
+
+.label{
+  display:block;
+  margin-bottom:8px;
+  color:var(--wine-dark);
+  font-size:17px;
+  font-weight:900;
+}
+
+.required,
+.optional{
+  display:inline-block;
+  margin-left:6px;
+  padding:2px 8px;
+  border-radius:999px;
+  font-size:11px;
+}
+
+.required{
+  color:#fff;
+  background:var(--danger);
+}
+
+.optional{
+  color:#5f5146;
+  background:#e9dfca;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="url"],
+input[type="date"],
+textarea,
+select{
+  width:100%;
+  min-height:58px;
+  padding:13px;
+  color:var(--text);
+  background:#fffdf8;
+  border:2px solid #d8c498;
+  border-radius:15px;
+  outline:none;
+}
+
+textarea{
+  min-height:145px;
+  resize:vertical;
+  line-height:1.7;
+}
+
+input:focus,
+textarea:focus,
+select:focus{
+  border-color:var(--wine);
+  box-shadow:0 0 0 4px rgba(123,23,23,.12);
+}
+
+.help{
+  margin:7px 0 0;
+  color:var(--gray);
+  font-size:13px;
+}
+
+.primary-button{
+  width:100%;
+  min-height:64px;
+  padding:14px 18px;
+  color:#fff;
+  background:
+    linear-gradient(
+      135deg,
+      var(--wine-light),
+      var(--wine-dark)
+    );
+  border:3px solid #f3cd69;
+  border-radius:19px;
+  font-size:20px;
+  font-weight:900;
+}
+
+.primary-button:disabled,
+.small-button:disabled,
+.action-button:disabled{
+  opacity:.55;
+  cursor:not-allowed;
+}
+
+.status-message{
+  display:none;
+  margin:14px 0;
+  padding:13px;
+  border-radius:14px;
+  text-align:center;
+  font-size:15px;
+  font-weight:900;
+}
+
+.status-message.show{
+  display:block;
+}
+
+.status-message.info{
+  color:#59410e;
+  background:#fff0bd;
+  border:1px solid #ddbc5e;
+}
+
+.status-message.error{
+  color:#821a14;
+  background:#ffe3df;
+  border:1px solid #e6aaa4;
+}
+
+.status-message.success{
+  color:#135c37;
+  background:#e2f6e9;
+  border:1px solid #9ed5b3;
+}
+
+.admin-panel{
+  display:none;
+}
+
+.admin-panel.show{
+  display:block;
+}
+
+.toolbar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom:14px;
+}
+
+.toolbar-title{
+  margin:0;
+  color:var(--wine-dark);
+  font-size:24px;
+  font-weight:900;
+}
+
+.toolbar-buttons{
+  display:flex;
+  gap:7px;
+}
+
+.small-button{
+  min-height:45px;
+  padding:8px 12px;
+  color:#fff;
+  background:var(--wine);
+  border:0;
+  border-radius:13px;
+  font-size:13px;
+  font-weight:900;
+}
+
+.small-button.light{
+  color:var(--wine-dark);
+  background:#f0dfbc;
+}
+
+.tabs{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:9px;
+  margin-bottom:16px;
+}
+
+.tab-button{
+  min-height:58px;
+  padding:10px;
+  color:var(--wine-dark);
+  background:#f7ead0;
+  border:2px solid #dfc389;
+  border-radius:16px;
+  font-weight:900;
+}
+
+.tab-button.active{
+  color:#fff;
+  background:var(--wine);
+  border-color:var(--wine);
+}
+
+.tab-panel{
+  display:none;
+}
+
+.tab-panel.active{
+  display:block;
+}
+
+.summary-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:8px;
+  margin-bottom:14px;
+}
+
+.summary-item{
+  padding:12px 5px;
+  text-align:center;
+  background:#fff8e6;
+  border:1px solid var(--border);
+  border-radius:15px;
+}
+
+.summary-number{
+  display:block;
+  color:var(--wine-dark);
+  font-size:27px;
+  line-height:1.2;
+  font-weight:900;
+}
+
+.summary-label{
+  display:block;
+  margin-top:3px;
+  color:var(--gray);
+  font-size:12px;
+  font-weight:900;
+}
+
+.filter-row{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:8px;
+  margin-bottom:16px;
+}
+
+.filter-button{
+  min-height:48px;
+  padding:9px 8px;
+  color:#5c4633;
+  background:#f5ead5;
+  border:2px solid #dfc795;
+  border-radius:14px;
+  font-size:14px;
+  font-weight:900;
+}
+
+.filter-button.active{
+  color:#fff;
+  background:var(--wine);
+  border-color:var(--wine);
+}
+
+.list{
+  display:grid;
+  gap:16px;
+}
+
+.item-card{
+  overflow:hidden;
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:21px;
+  box-shadow:var(--shadow);
+}
+
+.item-head{
+  padding:13px;
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  background:#fff5dc;
+  border-bottom:1px solid var(--border);
+}
+
+.item-id{
+  margin:0;
+  color:var(--wine-dark);
+  overflow-wrap:anywhere;
+  font-size:13px;
+  font-weight:900;
+}
+
+.item-date{
+  margin:3px 0 0;
+  color:var(--gray);
+  font-size:13px;
+}
+
+.status-badge{
+  flex:0 0 auto;
+  align-self:flex-start;
+  padding:5px 10px;
+  border-radius:999px;
+  font-size:12px;
+  font-weight:900;
+}
+
+.status-badge.pending,
+.status-badge.draft{
+  color:#694a00;
+  background:#ffe38a;
+}
+
+.status-badge.public{
+  color:#0e5c35;
+  background:#d9f4e3;
+}
+
+.status-badge.hidden{
+  color:#781c17;
+  background:#f9d9d6;
+}
+
+.item-body{
+  padding:15px;
+}
+
+.item-title{
+  margin:0;
+  color:var(--wine-dark);
+  font-size:21px;
+  font-weight:900;
+}
+
+.stars{
+  margin:5px 0 0;
+  color:#e39a00;
+  letter-spacing:1px;
+  font-size:24px;
+}
+
+.menu-name{
+  margin:9px 0 0;
+  padding:6px 10px;
+  display:inline-block;
+  color:#64461e;
+  background:#fff0c7;
+  border-radius:10px;
+  font-size:13px;
+  font-weight:900;
+}
+
+.item-text{
+  margin:12px 0 0;
+  padding:12px;
+  white-space:pre-wrap;
+  overflow-wrap:anywhere;
+  background:#faf6ed;
+  border-radius:14px;
+  font-size:16px;
+  line-height:1.75;
+}
+
+.photo-grid{
+  margin-top:12px;
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:8px;
+}
+
+.photo-box{
+  position:relative;
+  overflow:hidden;
+  background:#eee2ca;
+  border:1px solid var(--border);
+  border-radius:13px;
+}
+
+.item-photo{
+  width:100%;
+  height:165px;
+  object-fit:cover;
+}
+
+.remove-photo{
+  position:absolute;
+  top:6px;
+  right:6px;
+  width:40px;
+  height:40px;
+  padding:0;
+  color:#fff;
+  background:rgba(130,18,18,.92);
+  border:2px solid #fff;
+  border-radius:50%;
+  font-size:20px;
+  font-weight:900;
+}
+
+.notes-label{
+  display:block;
+  margin:14px 0 6px;
+  color:var(--wine-dark);
+  font-size:14px;
+  font-weight:900;
+}
+
+.notes-input{
+  min-height:90px;
+  font-size:15px;
+}
+
+.action-row{
+  margin-top:11px;
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:8px;
+}
+
+.action-button{
+  min-height:52px;
+  padding:9px 6px;
+  color:#fff;
+  border:0;
+  border-radius:14px;
+  font-size:13px;
+  font-weight:900;
+}
+
+.action-button.publish{
+  background:var(--green);
+}
+
+.action-button.pending,
+.action-button.draft{
+  color:#5d4100;
+  background:#f7d36d;
+}
+
+.action-button.hide{
+  background:var(--danger);
+}
+
+.action-button.edit,
+.action-button.save{
+  background:var(--blue);
+}
+
+.news-form{
+  margin-bottom:18px;
+}
+
+.news-form-title{
+  margin:0 0 16px;
+  color:var(--wine-dark);
+  font-size:23px;
+  font-weight:900;
+}
+
+.photo-select-button{
+  width:100%;
+  min-height:64px;
+  padding:13px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:var(--wine-dark);
+  background:#fff1c7;
+  border:3px dashed #b88435;
+  border-radius:17px;
+  font-weight:900;
+}
+
+#newsPhotoInput{
+  position:absolute;
+  width:1px;
+  height:1px;
+  opacity:0;
+  pointer-events:none;
+}
+
+.form-buttons{
+  display:grid;
+  grid-template-columns:2fr 1fr;
+  gap:8px;
+}
+
+.cancel-button{
+  min-height:64px;
+  padding:12px;
+  color:var(--wine-dark);
+  background:#ecdfc6;
+  border:0;
+  border-radius:18px;
+  font-weight:900;
+}
+
+.news-links{
+  margin-top:10px;
+  display:grid;
+  gap:7px;
+}
+
+.news-link{
+  padding:10px;
+  color:var(--blue);
+  background:#eef6ff;
+  border-radius:10px;
+  overflow-wrap:anywhere;
+  text-decoration:none;
+  font-size:13px;
+  font-weight:900;
+}
+
+.empty-box{
+  padding:30px 16px;
+  color:var(--gray);
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:20px;
+  text-align:center;
+  font-weight:900;
+}
+
+.footer{
+  padding:
+    25px
+    15px
+    calc(25px + env(safe-area-inset-bottom));
+  color:#f9e7bc;
+  background:var(--wine-dark);
+  text-align:center;
+  font-size:14px;
+}
+
+@media(min-width:600px){
+
+  .filter-row{
+    grid-template-columns:repeat(4,1fr);
+  }
+
+  .photo-grid{
+    grid-template-columns:repeat(3,1fr);
+  }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="page">
+
+<header class="header">
+
+  <a
+    class="back-button"
+    href="index.html"
+    aria-label="トップページへ戻る"
+  >
+    ←
+  </a>
+
+  <div>
+
+    <p class="header-title">
+      長崎亭 管理者画面
+    </p>
+
+    <p class="header-sub">
+      投稿確認・お知らせ更新
+    </p>
+
+  </div>
+
+</header>
+
+<main>
+
+<section
+  class="card login-card"
+  id="loginCard"
+>
+
+  <h1 class="login-title">
+    管理者ログイン
+  </h1>
+
+  <p class="login-text">
+    管理者パスワードを入力してください。
+  </p>
+
+  <form id="loginForm">
+
+    <input
+      id="adminPassword"
+      type="password"
+      autocomplete="current-password"
+      placeholder="管理者パスワード"
+    >
+
+    <button
+      class="primary-button"
+      id="loginButton"
+      type="submit"
+      style="margin-top:14px;"
+    >
+      管理者画面を開く
+    </button>
+
+  </form>
+
+  <div
+    class="status-message"
+    id="loginStatus"
+  ></div>
+
+</section>
+
+<section
+  class="admin-panel"
+  id="adminPanel"
+>
+
+  <div class="toolbar">
+
+    <h1 class="toolbar-title">
+      管理者操作
+    </h1>
+
+    <div class="toolbar-buttons">
+
+      <button
+        class="small-button"
+        id="refreshButton"
+        type="button"
+      >
+        更新
+      </button>
+
+      <button
+        class="small-button light"
+        id="logoutButton"
+        type="button"
+      >
+        終了
+      </button>
+
+    </div>
+
+  </div>
+
+  <div class="tabs">
+
+    <button
+      class="tab-button active"
+      type="button"
+      data-tab="posts"
+    >
+      お客様投稿
+    </button>
+
+    <button
+      class="tab-button"
+      type="button"
+      data-tab="news"
+    >
+      お知らせ作成
+    </button>
+
+  </div>
+
+  <div
+    class="status-message"
+    id="adminStatus"
+  ></div>
+
+  <section
+    class="tab-panel active"
+    id="postsPanel"
+  >
+
+    <div class="summary-grid">
+
+      <div class="summary-item">
+        <span
+          class="summary-number"
+          id="pendingCount"
+        >0</span>
+        <span class="summary-label">
+          確認待ち
+        </span>
+      </div>
+
+      <div class="summary-item">
+        <span
+          class="summary-number"
+          id="publicCount"
+        >0</span>
+        <span class="summary-label">
+          公開
+        </span>
+      </div>
+
+      <div class="summary-item">
+        <span
+          class="summary-number"
+          id="hiddenCount"
+        >0</span>
+        <span class="summary-label">
+          非公開
+        </span>
+      </div>
+
+    </div>
+
+    <div class="filter-row">
+
+      <button
+        class="filter-button"
+        type="button"
+        data-filter="すべて"
+      >
+        すべて
+      </button>
+
+      <button
+        class="filter-button active"
+        type="button"
+        data-filter="確認待ち"
+      >
+        確認待ち
+      </button>
+
+      <button
+        class="filter-button"
+        type="button"
+        data-filter="公開"
+      >
+        公開
+      </button>
+
+      <button
+        class="filter-button"
+        type="button"
+        data-filter="非公開"
+      >
+        非公開
+      </button>
+
+    </div>
+
+    <div
+      class="list"
+      id="postList"
+    ></div>
+
+  </section>
+
+  <section
+    class="tab-panel"
+    id="newsPanel"
+  >
+
+    <form
+      class="card news-form"
+      id="newsForm"
+    >
+
+      <h2 class="news-form-title">
+        お知らせを作成
+      </h2>
+
+      <input
+        id="newsId"
+        type="hidden"
+      >
+
+      <div class="field">
+
+        <label
+          class="label"
+          for="newsDate"
+        >
+          日付
+          <span class="required">必須</span>
+        </label>
+
+        <input
+          id="newsDate"
+          type="date"
+        >
+
+      </div>
+
+      <div class="field">
+
+        <label
+          class="label"
+          for="newsTitle"
+        >
+          タイトル
+          <span class="required">必須</span>
+        </label>
+
+        <input
+          id="newsTitle"
+          type="text"
+          maxlength="100"
+          placeholder="例：夏季休業のお知らせ"
+        >
+
+      </div>
+
+      <div class="field">
+
+        <label
+          class="label"
+          for="newsBody"
+        >
+          お知らせ本文
+          <span class="required">必須</span>
+        </label>
+
+        <textarea
+          id="newsBody"
+          maxlength="5000"
+          placeholder="お知らせ内容を入力してください。"
+        ></textarea>
+
+      </div>
+
+      <div class="field">
+
+        <span class="label">
+          画像
+          <span class="optional">任意・最大5枚</span>
+        </span>
+
+        <label
+          class="photo-select-button"
+          for="newsPhotoInput"
+        >
+          📷 写真を選ぶ
+        </label>
+
+        <input
+          id="newsPhotoInput"
+          type="file"
+          accept="image/*"
+          multiple
+        >
+
+        <p
+          class="help"
+          id="newsPhotoCount"
+        >
+          0 / 5枚
+        </p>
+
+        <div
+          class="photo-grid"
+          id="newsPhotoPreview"
+        ></div>
+
+      </div>
+
+      <div class="field">
+
+        <label
+          class="label"
+          for="newsVideoUrl"
+        >
+          YouTube・動画URL
+          <span class="optional">任意</span>
+        </label>
+
+        <input
+          id="newsVideoUrl"
+          type="url"
+          placeholder="https://..."
+        >
+
+      </div>
+
+      <div class="field">
+
+        <label
+          class="label"
+          for="newsExternalUrl"
+        >
+          外部リンク
+          <span class="optional">任意</span>
+        </label>
+
+        <input
+          id="newsExternalUrl"
+          type="url"
+          placeholder="https://..."
+        >
+
+      </div>
+
+      <div class="field">
+
+        <label
+          class="label"
+          for="newsStatus"
+        >
+          公開状態
+        </label>
+
+        <select id="newsStatus">
+          <option value="下書き">下書き</option>
+          <option value="公開">公開</option>
+          <option value="非公開">非公開</option>
+        </select>
+
+      </div>
+
+      <div class="form-buttons">
+
+        <button
+          class="primary-button"
+          id="newsSaveButton"
+          type="submit"
+        >
+          お知らせを保存
+        </button>
+
+        <button
+          class="cancel-button"
+          id="newsCancelButton"
+          type="button"
+        >
+          入力取消
+        </button>
+
+      </div>
+
+    </form>
+
+    <div
+      class="list"
+      id="newsList"
+    ></div>
+
+  </section>
+
+</section>
+
+</main>
+
+<footer class="footer">
+  長崎亭｜地域のお店応援DX 管理者専用
+</footer>
+
+</div>
+
+<script>
+
+const GAS_URL =
+  "https://script.google.com/macros/s/AKfycbz77QIYPX0z4er8nRAMhP5FK3E3xB1ib0pPObaSIEbj99Z7dK4BZ-q5H5SQ0MX7p_tm4Q/exec";
+
+const MAX_PHOTOS = 5;
+const MAX_FILE_SIZE = 20 * 1024 * 1024;
+const MAX_IMAGE_WIDTH = 1600;
+const JPEG_QUALITY = 0.78;
+const PASSWORD_KEY = "nagasakiteiAdminPassword";
+
+let adminPassword =
+  sessionStorage.getItem(
+    PASSWORD_KEY
+  ) || "";
+
+let posts = [];
+let newsItems = [];
+let currentFilter = "確認待ち";
+let existingNewsImages = [];
+let newNewsFiles = [];
+
+const loginCard =
+  document.getElementById(
+    "loginCard"
+  );
+
+const loginForm =
+  document.getElementById(
+    "loginForm"
+  );
+
+const passwordInput =
+  document.getElementById(
+    "adminPassword"
+  );
+
+const loginButton =
+  document.getElementById(
+    "loginButton"
+  );
+
+const loginStatus =
+  document.getElementById(
+    "loginStatus"
+  );
+
+const adminPanel =
+  document.getElementById(
+    "adminPanel"
+  );
+
+const adminStatus =
+  document.getElementById(
+    "adminStatus"
+  );
+
+const postList =
+  document.getElementById(
+    "postList"
+  );
+
+const newsList =
+  document.getElementById(
+    "newsList"
+  );
+
+const refreshButton =
+  document.getElementById(
+    "refreshButton"
+  );
+
+const logoutButton =
+  document.getElementById(
+    "logoutButton"
+  );
+
+const pendingCount =
+  document.getElementById(
+    "pendingCount"
+  );
+
+const publicCount =
+  document.getElementById(
+    "publicCount"
+  );
+
+const hiddenCount =
+  document.getElementById(
+    "hiddenCount"
+  );
+
+const tabButtons =
+  document.querySelectorAll(
+    ".tab-button"
+  );
+
+const filterButtons =
+  document.querySelectorAll(
+    ".filter-button"
+  );
+
+const postsPanel =
+  document.getElementById(
+    "postsPanel"
+  );
+
+const newsPanel =
+  document.getElementById(
+    "newsPanel"
+  );
+
+const newsForm =
+  document.getElementById(
+    "newsForm"
+  );
+
+const newsIdInput =
+  document.getElementById(
+    "newsId"
+  );
+
+const newsDateInput =
+  document.getElementById(
+    "newsDate"
+  );
+
+const newsTitleInput =
+  document.getElementById(
+    "newsTitle"
+  );
+
+const newsBodyInput =
+  document.getElementById(
+    "newsBody"
+  );
+
+const newsPhotoInput =
+  document.getElementById(
+    "newsPhotoInput"
+  );
+
+const newsPhotoCount =
+  document.getElementById(
+    "newsPhotoCount"
+  );
+
+const newsPhotoPreview =
+  document.getElementById(
+    "newsPhotoPreview"
+  );
+
+const newsVideoUrlInput =
+  document.getElementById(
+    "newsVideoUrl"
+  );
+
+const newsExternalUrlInput =
+  document.getElementById(
+    "newsExternalUrl"
+  );
+
+const newsStatusInput =
+  document.getElementById(
+    "newsStatus"
+  );
+
+const newsSaveButton =
+  document.getElementById(
+    "newsSaveButton"
+  );
+
+const newsCancelButton =
+  document.getElementById(
+    "newsCancelButton"
+  );
+
+if(adminPassword){
+  passwordInput.value =
+    adminPassword;
+}
+
+setToday();
+
+loginForm.addEventListener(
+  "submit",
+  handleLogin
+);
+
+refreshButton.addEventListener(
+  "click",
+  loadAllData
+);
+
+logoutButton.addEventListener(
+  "click",
+  logout
+);
+
+newsForm.addEventListener(
+  "submit",
+  handleNewsSave
+);
+
+newsCancelButton.addEventListener(
+  "click",
+  resetNewsForm
+);
+
+newsPhotoInput.addEventListener(
+  "change",
+  handleNewsPhotoSelection
+);
+
+tabButtons.forEach(
+  function(button){
+
+    button.addEventListener(
+      "click",
+      function(){
+
+        const tab =
+          button.dataset.tab;
+
+        tabButtons.forEach(
+          function(item){
+            item.classList.toggle(
+              "active",
+              item === button
+            );
+          }
+        );
+
+        postsPanel.classList.toggle(
+          "active",
+          tab === "posts"
+        );
+
+        newsPanel.classList.toggle(
+          "active",
+          tab === "news"
+        );
+
+      }
+    );
+
+  }
+);
+
+filterButtons.forEach(
+  function(button){
+
+    button.addEventListener(
+      "click",
+      function(){
+
+        currentFilter =
+          button.dataset.filter;
+
+        filterButtons.forEach(
+          function(item){
+            item.classList.toggle(
+              "active",
+              item === button
+            );
+          }
+        );
+
+        renderPosts();
+
+      }
+    );
+
+  }
+);
+
+postList.addEventListener(
+  "click",
+  handlePostAction
+);
+
+newsList.addEventListener(
+  "click",
+  handleNewsAction
+);
+
+newsPhotoPreview.addEventListener(
+  "click",
+  handlePreviewRemove
+);
+
+
+async function handleLogin(event){
+
+  event.preventDefault();
+
+  const password =
+    passwordInput.value.trim();
+
+  if(!password){
+
+    showMessage(
+      loginStatus,
+      "管理者パスワードを入力してください。",
+      "error"
+    );
+
+    return;
+
+  }
+
+  adminPassword =
+    password;
+
+  await loadAllData(true);
+
+}
+
+
+async function loadAllData(isLogin){
+
+  setLoading(true);
+
+  showMessage(
+    isLogin
+      ? loginStatus
+      : adminStatus,
+    "データを読み込んでいます…",
+    "info"
+  );
+
+  try{
+
+    const results =
+      await Promise.all([
+
+        apiRequest({
+          mode:"adminList",
+          adminPassword:
+            adminPassword
+        }),
+
+        apiRequest({
+          mode:"adminNewsList",
+          adminPassword:
+            adminPassword
+        })
+
+      ]);
+
+    posts =
+      Array.isArray(
+        results[0].posts
+      )
+        ? results[0].posts.map(
+            normalizePost
+          )
+        : [];
+
+    newsItems =
+      Array.isArray(
+        results[1].news
+      )
+        ? results[1].news.map(
+            normalizeNews
+          )
+        : [];
+
+    sessionStorage.setItem(
+      PASSWORD_KEY,
+      adminPassword
+    );
+
+    loginCard.style.display =
+      "none";
+
+    adminPanel.classList.add(
+      "show"
+    );
+
+    clearMessage(
+      loginStatus
+    );
+
+    showMessage(
+      adminStatus,
+      "最新データを読み込みました。",
+      "success"
+    );
+
+    updateCounts();
+    renderPosts();
+    renderNews();
+
+  }catch(error){
+
+    showMessage(
+      isLogin
+        ? loginStatus
+        : adminStatus,
+      getErrorMessage(error),
+      "error"
+    );
+
+  }finally{
+
+    setLoading(false);
+
+  }
+
+}
+
+
+async function apiRequest(data){
+
+  const response =
+    await fetch(
+      GAS_URL,
+      {
+        method:"POST",
+
+        headers:{
+          "Content-Type":
+            "text/plain;charset=utf-8"
+        },
+
+        body:
+          JSON.stringify(data),
+
+        redirect:"follow"
+      }
+    );
+
+  if(!response.ok){
+
+    throw new Error(
+      "通信エラーが発生しました。"
+    );
+
+  }
+
+  const responseText =
+    await response.text();
+
+  let result;
+
+  try{
+
+    result =
+      JSON.parse(
+        responseText
+      );
+
+  }catch(error){
+
+    throw new Error(
+      "サーバーから正しい返答を受け取れませんでした。"
+    );
+
+  }
+
+  if(
+    !result ||
+    result.success !== true
+  ){
+
+    throw new Error(
+      result &&
+      result.message
+        ? result.message
+        : "処理に失敗しました。"
+    );
+
+  }
+
+  return result;
+
+}
+
+
+function normalizePost(item){
+
+  return{
+    id:
+      String(
+        item.id || ""
+      ),
+
+    date:
+      String(
+        item.date || ""
+      ),
+
+    nickname:
+      String(
+        item.nickname || "名前なし"
+      ),
+
+    rating:
+      Math.max(
+        0,
+        Math.min(
+          5,
+          Number(
+            item.rating
+          ) || 0
+        )
+      ),
+
+    comment:
+      String(
+        item.comment || ""
+      ),
+
+    menuName:
+      String(
+        item.menuName || ""
+      ),
+
+    images:
+      Array.isArray(
+        item.images
+      )
+        ? item.images
+            .map(safeUrl)
+            .filter(Boolean)
+            .slice(0,5)
+        : [],
+
+    status:
+      normalizePostStatus(
+        item.status
+      ),
+
+    approvedAt:
+      String(
+        item.approvedAt || ""
+      ),
+
+    notes:
+      String(
+        item.notes || ""
+      )
+  };
+
+}
+
+
+function normalizeNews(item){
+
+  return{
+    id:
+      String(
+        item.id || ""
+      ),
+
+    date:
+      String(
+        item.date || ""
+      ),
+
+    title:
+      String(
+        item.title || ""
+      ),
+
+    body:
+      String(
+        item.body || ""
+      ),
+
+    images:
+      Array.isArray(
+        item.images
+      )
+        ? item.images
+            .map(safeUrl)
+            .filter(Boolean)
+            .slice(0,5)
+        : [],
+
+    videoUrl:
+      safeUrl(
+        item.videoUrl
+      ),
+
+    externalUrl:
+      safeUrl(
+        item.externalUrl
+      ),
+
+    status:
+      normalizeNewsStatus(
+        item.status
+      ),
+
+    createdAt:
+      String(
+        item.createdAt || ""
+      ),
+
+    updatedAt:
+      String(
+        item.updatedAt || ""
+      )
+  };
+
+}
+
+
+function updateCounts(){
+
+  pendingCount.textContent =
+    String(
+      posts.filter(
+        function(post){
+          return post.status ===
+            "確認待ち";
+        }
+      ).length
+    );
+
+  publicCount.textContent =
+    String(
+      posts.filter(
+        function(post){
+          return post.status ===
+            "公開";
+        }
+      ).length
+    );
+
+  hiddenCount.textContent =
+    String(
+      posts.filter(
+        function(post){
+          return post.status ===
+            "非公開";
+        }
+      ).length
+    );
+
+}
+
+
+function renderPosts(){
+
+  const filtered =
+    currentFilter === "すべて"
+      ? posts
+      : posts.filter(
+          function(post){
+            return post.status ===
+              currentFilter;
+          }
+        );
+
+  if(filtered.length === 0){
+
+    postList.innerHTML =
+      '<div class="empty-box">該当する投稿はありません。</div>';
+
+    return;
+
+  }
+
+  postList.innerHTML =
+    filtered.map(
+      function(post){
+
+        const photos =
+          post.images.map(
+            function(url,index){
+
+              return `
+                <a
+                  class="photo-box"
+                  href="${escapeAttribute(url)}"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  <img
+                    class="item-photo"
+                    src="${escapeAttribute(url)}"
+                    alt="投稿写真 ${index + 1}"
+                    loading="lazy"
+                  >
+                </a>
+              `;
+
+            }
+          ).join("");
+
+        return `
+          <article
+            class="item-card"
+            data-post-id="${escapeAttribute(post.id)}"
+          >
+
+            <div class="item-head">
+
+              <div>
+                <p class="item-id">
+                  受付番号：${escapeHtml(post.id)}
+                </p>
+
+                <p class="item-date">
+                  ${escapeHtml(post.date)}
+                </p>
+              </div>
+
+              <span
+                class="status-badge ${getStatusClass(post.status)}"
+              >
+                ${escapeHtml(post.status)}
+              </span>
+
+            </div>
+
+            <div class="item-body">
+
+              <h2 class="item-title">
+                ${escapeHtml(post.nickname)}
+              </h2>
+
+              <p class="stars">
+                ${"★".repeat(post.rating)}${"☆".repeat(5-post.rating)}
+              </p>
+
+              ${
+                post.menuName
+                  ? `
+                    <p class="menu-name">
+                      料理名：${escapeHtml(post.menuName)}
+                    </p>
+                  `
+                  : ""
+              }
+
+              <p class="item-text">
+                ${escapeHtml(post.comment)}
+              </p>
+
+              ${
+                photos
+                  ? `<div class="photo-grid">${photos}</div>`
+                  : ""
+              }
+
+              ${
+                post.approvedAt
+                  ? `
+                    <p class="help">
+                      承認日時：${escapeHtml(post.approvedAt)}
+                    </p>
+                  `
+                  : ""
+              }
+
+              <label class="notes-label">
+                管理者備考
+              </label>
+
+              <textarea
+                class="notes-input"
+                maxlength="500"
+                placeholder="確認内容や非公開理由など"
+              >${escapeHtml(post.notes)}</textarea>
+
+              <div class="action-row">
+
+                <button
+                  class="action-button publish"
+                  type="button"
+                  data-post-action="公開"
+                >
+                  公開する
+                </button>
+
+                <button
+                  class="action-button pending"
+                  type="button"
+                  data-post-action="確認待ち"
+                >
+                  確認待ち
+                </button>
+
+                <button
+                  class="action-button hide"
+                  type="button"
+                  data-post-action="非公開"
+                >
+                  非公開
+                </button>
+
+                <button
+                  class="action-button save"
+                  type="button"
+                  data-post-action="備考保存"
+                >
+                  備考保存
+                </button>
+
+              </div>
+
+            </div>
+
+          </article>
+        `;
+
+      }
+    ).join("");
+
+}
+
+
+async function handlePostAction(event){
+
+  const button =
+    event.target.closest(
+      "[data-post-action]"
+    );
+
+  if(!button){
+    return;
+  }
+
+  const card =
+    button.closest(
+      "[data-post-id]"
+    );
+
+  const postId =
+    card.dataset.postId;
+
+  const post =
+    posts.find(
+      function(item){
+        return item.id ===
+          postId;
+      }
+    );
+
+  if(!post){
+    return;
+  }
+
+  const notes =
+    card
+      .querySelector(
+        ".notes-input"
+      )
+      .value
+      .trim();
+
+  const action =
+    button.dataset.postAction;
+
+  const status =
+    action === "備考保存"
+      ? post.status
+      : action;
+
+  setCardDisabled(
+    card,
+    true
+  );
+
+  showMessage(
+    adminStatus,
+    "投稿情報を更新しています…",
+    "info"
+  );
+
+  try{
+
+    const result =
+      await apiRequest({
+        mode:"adminUpdate",
+        adminPassword:
+          adminPassword,
+        postId:
+          post.id,
+        status:
+          status,
+        notes:
+          notes
+      });
+
+    post.status =
+      normalizePostStatus(
+        result.status
+      );
+
+    post.notes =
+      String(
+        result.notes || notes
+      );
+
+    post.approvedAt =
+      String(
+        result.approvedAt || ""
+      );
+
+    updateCounts();
+    renderPosts();
+
+    showMessage(
+      adminStatus,
+      "投稿情報を更新しました。",
+      "success"
+    );
+
+  }catch(error){
+
+    setCardDisabled(
+      card,
+      false
+    );
+
+    showMessage(
+      adminStatus,
+      getErrorMessage(error),
+      "error"
+    );
+
+  }
+
+}
+
+
+function renderNews(){
+
+  if(newsItems.length === 0){
+
+    newsList.innerHTML =
+      '<div class="empty-box">お知らせはまだありません。</div>';
+
+    return;
+
+  }
+
+  newsList.innerHTML =
+    newsItems.map(
+      function(item){
+
+        const photos =
+          item.images.map(
+            function(url,index){
+
+              return `
+                <a
+                  class="photo-box"
+                  href="${escapeAttribute(url)}"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  <img
+                    class="item-photo"
+                    src="${escapeAttribute(url)}"
+                    alt="お知らせ画像 ${index + 1}"
+                    loading="lazy"
+                  >
+                </a>
+              `;
+
+            }
+          ).join("");
+
+        const links = [
+          item.videoUrl
+            ? `
+              <a
+                class="news-link"
+                href="${escapeAttribute(item.videoUrl)}"
+                target="_blank"
+                rel="noopener"
+              >
+                動画を見る
+              </a>
+            `
+            : "",
+
+          item.externalUrl
+            ? `
+              <a
+                class="news-link"
+                href="${escapeAttribute(item.externalUrl)}"
+                target="_blank"
+                rel="noopener"
+              >
+                外部リンクを開く
+              </a>
+            `
+            : ""
+        ].join("");
+
+        return `
+          <article
+            class="item-card"
+            data-news-id="${escapeAttribute(item.id)}"
+          >
+
+            <div class="item-head">
+
+              <div>
+                <p class="item-id">
+                  ${escapeHtml(item.id)}
+                </p>
+
+                <p class="item-date">
+                  ${escapeHtml(item.date)}
+                </p>
+              </div>
+
+              <span
+                class="status-badge ${getStatusClass(item.status)}"
+              >
+                ${escapeHtml(item.status)}
+              </span>
+
+            </div>
+
+            <div class="item-body">
+
+              <h2 class="item-title">
+                ${escapeHtml(item.title)}
+              </h2>
+
+              <p class="item-text">
+                ${escapeHtml(item.body)}
+              </p>
+
+              ${
+                photos
+                  ? `<div class="photo-grid">${photos}</div>`
+                  : ""
+              }
+
+              ${
+                links
+                  ? `<div class="news-links">${links}</div>`
+                  : ""
+              }
+
+              <div class="action-row">
+
+                <button
+                  class="action-button edit"
+                  type="button"
+                  data-news-action="編集"
+                >
+                  編集する
+                </button>
+
+                <button
+                  class="action-button publish"
+                  type="button"
+                  data-news-action="公開"
+                >
+                  公開する
+                </button>
+
+                <button
+                  class="action-button draft"
+                  type="button"
+                  data-news-action="下書き"
+                >
+                  下書き
+                </button>
+
+                <button
+                  class="action-button hide"
+                  type="button"
+                  data-news-action="非公開"
+                >
+                  非公開
+                </button>
+
+              </div>
+
+            </div>
+
+          </article>
+        `;
+
+      }
+    ).join("");
+
+}
+
+
+async function handleNewsAction(event){
+
+  const button =
+    event.target.closest(
+      "[data-news-action]"
+    );
+
+  if(!button){
+    return;
+  }
+
+  const card =
+    button.closest(
+      "[data-news-id]"
+    );
+
+  const newsId =
+    card.dataset.newsId;
+
+  const item =
+    newsItems.find(
+      function(news){
+        return news.id ===
+          newsId;
+      }
+    );
+
+  if(!item){
+    return;
+  }
+
+  const action =
+    button.dataset.newsAction;
+
+  if(action === "編集"){
+
+    editNews(item);
+    return;
+
+  }
+
+  await saveNewsItem(
+    item,
+    action,
+    card
+  );
+
+}
+
+
+function editNews(item){
+
+  newsIdInput.value =
+    item.id;
+
+  newsDateInput.value =
+    item.date;
+
+  newsTitleInput.value =
+    item.title;
+
+  newsBodyInput.value =
+    item.body;
+
+  newsVideoUrlInput.value =
+    item.videoUrl;
+
+  newsExternalUrlInput.value =
+    item.externalUrl;
+
+  newsStatusInput.value =
+    item.status;
+
+  existingNewsImages =
+    item.images.slice();
+
+  newNewsFiles = [];
+
+  renderNewsPhotoPreview();
+
+  newsSaveButton.textContent =
+    "お知らせを更新";
+
+  newsForm.scrollIntoView({
+    behavior:"smooth",
+    block:"start"
+  });
+
+}
+
+
+async function saveNewsItem(
+  item,
+  status,
+  card
+){
+
+  setCardDisabled(
+    card,
+    true
+  );
+
+  showMessage(
+    adminStatus,
+    "お知らせを更新しています…",
+    "info"
+  );
+
+  try{
+
+    await apiRequest({
+      mode:"adminNewsSave",
+      adminPassword:
+        adminPassword,
+      newsId:
+        item.id,
+      date:
+        item.date,
+      title:
+        item.title,
+      body:
+        item.body,
+      existingImages:
+        item.images,
+      newImages:[],
+      videoUrl:
+        item.videoUrl,
+      externalUrl:
+        item.externalUrl,
+      status:
+        status
+    });
+
+    await loadNewsOnly();
+
+    showMessage(
+      adminStatus,
+      "お知らせを更新しました。",
+      "success"
+    );
+
+  }catch(error){
+
+    setCardDisabled(
+      card,
+      false
+    );
+
+    showMessage(
+      adminStatus,
+      getErrorMessage(error),
+      "error"
+    );
+
+  }
+
+}
+
+
+async function handleNewsSave(event){
+
+  event.preventDefault();
+
+  const date =
+    newsDateInput.value;
+
+  const title =
+    newsTitleInput.value.trim();
+
+  const body =
+    newsBodyInput.value.trim();
+
+  if(!date){
+
+    showMessage(
+      adminStatus,
+      "日付を入力してください。",
+      "error"
+    );
+
+    return;
+
+  }
+
+  if(!title){
+
+    showMessage(
+      adminStatus,
+      "タイトルを入力してください。",
+      "error"
+    );
+
+    return;
+
+  }
+
+  if(!body){
+
+    showMessage(
+      adminStatus,
+      "お知らせ本文を入力してください。",
+      "error"
+    );
+
+    return;
+
+  }
+
+  if(
+    existingNewsImages.length +
+    newNewsFiles.length >
+    MAX_PHOTOS
+  ){
+
+    showMessage(
+      adminStatus,
+      "画像は最大5枚までです。",
+      "error"
+    );
+
+    return;
+
+  }
+
+  newsSaveButton.disabled =
+    true;
+
+  newsSaveButton.textContent =
+    "画像を準備しています…";
+
+  showMessage(
+    adminStatus,
+    "お知らせを保存しています…",
+    "info"
+  );
+
+  try{
+
+    const convertedImages = [];
+
+    for(
+      let index = 0;
+      index < newNewsFiles.length;
+      index++
+    ){
+
+      newsSaveButton.textContent =
+        "画像準備 " +
+        String(index + 1) +
+        " / " +
+        String(newNewsFiles.length);
+
+      convertedImages.push(
+        await convertImageForUpload(
+          newNewsFiles[index]
+        )
+      );
+
+    }
+
+    newsSaveButton.textContent =
+      "保存しています…";
+
+    await apiRequest({
+      mode:"adminNewsSave",
+      adminPassword:
+        adminPassword,
+      newsId:
+        newsIdInput.value,
+      date:
+        date,
+      title:
+        title,
+      body:
+        body,
+      existingImages:
+        existingNewsImages,
+      newImages:
+        convertedImages,
+      videoUrl:
+        newsVideoUrlInput.value.trim(),
+      externalUrl:
+        newsExternalUrlInput.value.trim(),
+      status:
+        newsStatusInput.value
+    });
+
+    resetNewsForm();
+
+    await loadNewsOnly();
+
+    showMessage(
+      adminStatus,
+      "お知らせを保存しました。",
+      "success"
+    );
+
+  }catch(error){
+
+    showMessage(
+      adminStatus,
+      getErrorMessage(error),
+      "error"
+    );
+
+  }finally{
+
+    newsSaveButton.disabled =
+      false;
+
+    newsSaveButton.textContent =
+      "お知らせを保存";
+
+  }
+
+}
+
+
+async function loadNewsOnly(){
+
+  const result =
+    await apiRequest({
+      mode:"adminNewsList",
+      adminPassword:
+        adminPassword
+    });
+
+  newsItems =
+    Array.isArray(
+      result.news
+    )
+      ? result.news.map(
+          normalizeNews
+        )
+      : [];
+
+  renderNews();
+
+}
+
+
+function handleNewsPhotoSelection(event){
+
+  const files =
+    Array.from(
+      event.target.files || []
+    );
+
+  for(const file of files){
+
+    if(
+      existingNewsImages.length +
+      newNewsFiles.length >=
+      MAX_PHOTOS
+    ){
+      break;
+    }
+
+    if(
+      !file.type.startsWith(
+        "image/"
+      )
+    ){
+      continue;
+    }
+
+    if(
+      file.size >
+      MAX_FILE_SIZE
+    ){
+      continue;
+    }
+
+    const duplicate =
+      newNewsFiles.some(
+        function(selected){
+
+          return (
+            selected.name ===
+              file.name &&
+            selected.size ===
+              file.size &&
+            selected.lastModified ===
+              file.lastModified
+          );
+
+        }
+      );
+
+    if(!duplicate){
+
+      newNewsFiles.push(
+        file
+      );
+
+    }
+
+  }
+
+  newsPhotoInput.value =
+    "";
+
+  renderNewsPhotoPreview();
+
+}
+
+
+function renderNewsPhotoPreview(){
+
+  newsPhotoPreview.innerHTML =
+    "";
+
+  existingNewsImages.forEach(
+    function(url,index){
+
+      const box =
+        createPreviewBox(
+          url,
+          "existing",
+          index
+        );
+
+      newsPhotoPreview.appendChild(
+        box
+      );
+
+    }
+  );
+
+  newNewsFiles.forEach(
+    function(file,index){
+
+      const objectUrl =
+        URL.createObjectURL(
+          file
+        );
+
+      const box =
+        createPreviewBox(
+          objectUrl,
+          "new",
+          index
+        );
+
+      const image =
+        box.querySelector(
+          "img"
+        );
+
+      image.addEventListener(
+        "load",
+        function(){
+
+          URL.revokeObjectURL(
+            objectUrl
+          );
+
+        }
+      );
+
+      newsPhotoPreview.appendChild(
+        box
+      );
+
+    }
+  );
+
+  newsPhotoCount.textContent =
+    String(
+      existingNewsImages.length +
+      newNewsFiles.length
+    ) +
+    " / 5枚";
+
+}
+
+
+function createPreviewBox(
+  url,
+  kind,
+  index
+){
+
+  const box =
+    document.createElement(
+      "div"
+    );
+
+  box.className =
+    "photo-box";
+
+  const image =
+    document.createElement(
+      "img"
+    );
+
+  image.className =
+    "item-photo";
+
+  image.src =
+    url;
+
+  image.alt =
+    "選択した画像";
+
+  const button =
+    document.createElement(
+      "button"
+    );
+
+  button.className =
+    "remove-photo";
+
+  button.type =
+    "button";
+
+  button.textContent =
+    "×";
+
+  button.dataset.removeKind =
+    kind;
+
+  button.dataset.removeIndex =
+    String(index);
+
+  box.appendChild(
+    image
+  );
+
+  box.appendChild(
+    button
+  );
+
+  return box;
+
+}
+
+
+function handlePreviewRemove(event){
+
+  const button =
+    event.target.closest(
+      "[data-remove-kind]"
+    );
+
+  if(!button){
+    return;
+  }
+
+  const index =
+    Number(
+      button.dataset.removeIndex
+    );
+
+  if(
+    button.dataset.removeKind ===
+    "existing"
+  ){
+
+    existingNewsImages.splice(
+      index,
+      1
+    );
+
+  }else{
+
+    newNewsFiles.splice(
+      index,
+      1
+    );
+
+  }
+
+  renderNewsPhotoPreview();
+
+}
+
+
+function resetNewsForm(){
+
+  newsForm.reset();
+
+  newsIdInput.value =
+    "";
+
+  existingNewsImages = [];
+  newNewsFiles = [];
+
+  setToday();
+
+  newsStatusInput.value =
+    "下書き";
+
+  newsSaveButton.textContent =
+    "お知らせを保存";
+
+  renderNewsPhotoPreview();
+
+}
+
+
+async function convertImageForUpload(file){
+
+  const imageElement =
+    await loadImageFromFile(
+      file
+    );
+
+  let width =
+    imageElement.naturalWidth ||
+    imageElement.width;
+
+  let height =
+    imageElement.naturalHeight ||
+    imageElement.height;
+
+  if(
+    width < 1 ||
+    height < 1
+  ){
+
+    throw new Error(
+      "画像を読み込めませんでした。"
+    );
+
+  }
+
+  if(
+    width >
+    MAX_IMAGE_WIDTH
+  ){
+
+    const ratio =
+      MAX_IMAGE_WIDTH /
+      width;
+
+    width =
+      MAX_IMAGE_WIDTH;
+
+    height =
+      Math.round(
+        height * ratio
+      );
+
+  }
+
+  const canvas =
+    document.createElement(
+      "canvas"
+    );
+
+  canvas.width =
+    width;
+
+  canvas.height =
+    height;
+
+  const context =
+    canvas.getContext(
+      "2d"
+    );
+
+  context.drawImage(
+    imageElement,
+    0,
+    0,
+    width,
+    height
+  );
+
+  return{
+    name:
+      replaceExtension(
+        file.name,
+        "jpg"
+      ),
+
+    mimeType:
+      "image/jpeg",
+
+    data:
+      canvas.toDataURL(
+        "image/jpeg",
+        JPEG_QUALITY
+      )
+  };
+
+}
+
+
+function loadImageFromFile(file){
+
+  return new Promise(
+    function(resolve,reject){
+
+      const objectUrl =
+        URL.createObjectURL(
+          file
+        );
+
+      const image =
+        new Image();
+
+      image.onload =
+        function(){
+
+          URL.revokeObjectURL(
+            objectUrl
+          );
+
+          resolve(
+            image
+          );
+
+        };
+
+      image.onerror =
+        function(){
+
+          URL.revokeObjectURL(
+            objectUrl
+          );
+
+          reject(
+            new Error(
+              "画像を読み込めませんでした。"
+            )
+          );
+
+        };
+
+      image.src =
+        objectUrl;
+
+    }
+  );
+
+}
+
+
+function replaceExtension(
+  filename,
+  extension
+){
+
+  const cleanName =
+    String(
+      filename || "photo"
+    )
+      .replace(
+        /\.[^.]+$/,
+        ""
+      )
+      .replace(
+        /[^a-zA-Z0-9ぁ-んァ-ヶ一-龠_-]/g,
+        "-"
+      )
+      .slice(
+        0,
+        60
+      );
+
+  return (
+    cleanName +
+    "." +
+    extension
+  );
+
+}
+
+
+function normalizePostStatus(value){
+
+  const status =
+    String(
+      value || ""
+    );
+
+  if(status === "公開"){
+    return "公開";
+  }
+
+  if(status === "非公開"){
+    return "非公開";
+  }
+
+  return "確認待ち";
+
+}
+
+
+function normalizeNewsStatus(value){
+
+  const status =
+    String(
+      value || ""
+    );
+
+  if(status === "公開"){
+    return "公開";
+  }
+
+  if(status === "非公開"){
+    return "非公開";
+  }
+
+  return "下書き";
+
+}
+
+
+function getStatusClass(status){
+
+  if(status === "公開"){
+    return "public";
+  }
+
+  if(status === "非公開"){
+    return "hidden";
+  }
+
+  if(status === "下書き"){
+    return "draft";
+  }
+
+  return "pending";
+
+}
+
+
+function setCardDisabled(
+  card,
+  disabled
+){
+
+  card
+    .querySelectorAll(
+      "button"
+    )
+    .forEach(
+      function(button){
+
+        button.disabled =
+          disabled;
+
+      }
+    );
+
+}
+
+
+function setLoading(isLoading){
+
+  loginButton.disabled =
+    isLoading;
+
+  refreshButton.disabled =
+    isLoading;
+
+  loginButton.textContent =
+    isLoading
+      ? "読み込み中…"
+      : "管理者画面を開く";
+
+}
+
+
+function setToday(){
+
+  const now =
+    new Date();
+
+  const year =
+    now.getFullYear();
+
+  const month =
+    String(
+      now.getMonth() + 1
+    ).padStart(
+      2,
+      "0"
+    );
+
+  const day =
+    String(
+      now.getDate()
+    ).padStart(
+      2,
+      "0"
+    );
+
+  newsDateInput.value =
+    year +
+    "-" +
+    month +
+    "-" +
+    day;
+
+}
+
+
+function logout(){
+
+  sessionStorage.removeItem(
+    PASSWORD_KEY
+  );
+
+  adminPassword = "";
+  posts = [];
+  newsItems = [];
+
+  passwordInput.value =
+    "";
+
+  adminPanel.classList.remove(
+    "show"
+  );
+
+  loginCard.style.display =
+    "block";
+
+  clearMessage(
+    adminStatus
+  );
+
+  clearMessage(
+    loginStatus
+  );
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+
+}
+
+
+function showMessage(
+  element,
+  message,
+  type
+){
+
+  element.textContent =
+    message;
+
+  element.className =
+    "status-message show " +
+    type;
+
+}
+
+
+function clearMessage(element){
+
+  element.textContent =
+    "";
+
+  element.className =
+    "status-message";
+
+}
+
+
+function getErrorMessage(error){
+
+  return error &&
+    error.message
+      ? error.message
+      : "処理中にエラーが発生しました。";
+
+}
+
+
+function safeUrl(value){
+
+  const url =
+    String(
+      value || ""
+    ).trim();
+
+  return /^https?:\/\//i.test(url)
+    ? url
+    : "";
+
+}
+
+
+function escapeHtml(value){
+
+  return String(
+    value || ""
+  )
+    .replace(
+      /&/g,
+      "&amp;"
+    )
+    .replace(
+      /</g,
+      "&lt;"
+    )
+    .replace(
+      />/g,
+      "&gt;"
+    )
+    .replace(
+      /"/g,
+      "&quot;"
+    )
+    .replace(
+      /'/g,
+      "&#039;"
+    );
+
+}
+
+
+function escapeAttribute(value){
+
+  return escapeHtml(
+    value
+  );
+
+}
+
+renderNewsPhotoPreview();
+
+</script>
+
+</body>
+</html>
