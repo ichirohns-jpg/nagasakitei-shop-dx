@@ -1221,6 +1221,10 @@ const GAS_URL =
 const SITE_URL =
   "https://ichirohns-jpg.github.io/nagasakitei-shop-dx/";
 
+const SHARE_URL =
+  SITE_URL +
+  "share.html";
+
 const SHARE_IMAGE_URL =
   SITE_URL +
   "banner-main.png?v=6";
@@ -1743,7 +1747,7 @@ function handleItemShare(event){
     SHARE_TEXT;
 
   let url =
-    SITE_URL;
+    SHARE_URL;
 
   if(itemType === "news"){
 
@@ -1765,7 +1769,7 @@ function handleItemShare(event){
         item.body;
 
       url =
-        SITE_URL +
+        SHARE_URL +
         "#news";
 
     }
@@ -1792,7 +1796,7 @@ function handleItemShare(event){
         item.comment;
 
       url =
-        SITE_URL +
+        SHARE_URL +
         "#reviews";
 
     }
@@ -1923,7 +1927,7 @@ async function shareSite(){
           SHARE_TEXT,
 
         url:
-          SITE_URL
+          SHARE_URL
       };
 
       try{
@@ -1990,7 +1994,7 @@ async function shareSite(){
   try{
 
     await navigator.clipboard.writeText(
-      SITE_URL
+      SHARE_URL
     );
 
     showToast(
@@ -2001,7 +2005,7 @@ async function shareSite(){
 
     window.prompt(
       "このリンクをコピーしてください",
-      SITE_URL
+      SHARE_URL
     );
 
   }
