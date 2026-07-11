@@ -1852,36 +1852,19 @@ async function shareContent(
 
   if(platform === "facebook"){
 
-    if(navigator.share){
-
-      try{
-
-        await navigator.share({
-          title:title,
-          text:text,
-          url:url
-        });
-
-        return;
-
-      }catch(error){
-
-        if(
-          error &&
-          error.name === "AbortError"
-        ){
-          return;
-        }
-
-      }
-
-    }
-
-    window.open(
+    const facebookUrl =
       "https://www.facebook.com/sharer/sharer.php?u=" +
-      encodeURIComponent(url),
-      "_blank"
-    );
+      encodeURIComponent(url);
+
+    const facebookWindow =
+      window.open(
+        facebookUrl,
+        "_blank"
+      );
+
+    if(!facebookWindow){
+      window.location.href = facebookUrl;
+    }
 
     return;
 
