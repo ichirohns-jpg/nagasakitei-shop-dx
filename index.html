@@ -15,7 +15,7 @@
   content="埼玉県志木市で愛される長崎亭。おすすめメニュー、お知らせ、写真・口コミ、店舗情報をご覧いただけます。"
 >
 
-<meta name="theme-color" content="#7b1717">
+<meta name="theme-color" content="#242424">
 
 <meta name="mobile-web-app-capable" content="yes">
 
@@ -136,17 +136,17 @@
 <style>
 
 :root{
-  --wine:#7b1717;
-  --wine-dark:#4d0d0d;
-  --cream:#fff8e8;
-  --yellow:#f6c85f;
-  --green:#287a45;
-  --blue:#146aa3;
-  --text:#2d2118;
+  --wine:#ad3038;
+  --wine-dark:#242424;
+  --cream:#f8f0e2;
+  --yellow:#e4ad43;
+  --green:#3d7452;
+  --blue:#2f6c86;
+  --text:#2b2927;
   --white:#ffffff;
-  --gray:#766d65;
-  --border:#dec99c;
-  --shadow:0 8px 24px rgba(66,34,13,.12);
+  --gray:#706861;
+  --border:#cbaa7d;
+  --shadow:0 8px 24px rgba(39,27,18,.16);
 }
 
 *{
@@ -162,9 +162,9 @@ body{
   background:
     radial-gradient(
       circle at top,
-      #fffdf6 0,
-      var(--cream) 38%,
-      #f5ead2 100%
+      #fffdf8 0,
+      #f8f0e2 38%,
+      #e7d6bf 100%
     );
   color:var(--text);
   font-family:
@@ -203,8 +203,8 @@ a{
   min-height:100vh;
   margin:0 auto;
   overflow:hidden;
-  background:rgba(255,253,247,.94);
-  box-shadow:0 0 36px rgba(53,27,10,.13);
+  background:rgba(255,251,242,.96);
+  box-shadow:0 0 36px rgba(35,25,18,.18);
 }
 
 .topbar{
@@ -220,7 +220,7 @@ a{
   align-items:center;
   gap:12px;
   color:#fff;
-  background:rgba(83,14,14,.97);
+  background:rgba(36,36,36,.98);
   border-bottom:3px solid var(--yellow);
 }
 
@@ -229,7 +229,7 @@ a{
   height:50px;
   flex:0 0 50px;
   object-fit:cover;
-  border:2px solid #f3cf75;
+  border:2px solid #e3ad4c;
   border-radius:14px;
   background:var(--cream);
 }
@@ -243,20 +243,20 @@ a{
 
 .topbar-sub{
   margin:3px 0 0;
-  color:#ffe7a8;
+  color:#f0c978;
   font-size:13px;
   font-weight:700;
 }
 
 .hero{
-  background:var(--wine-dark);
+  background:#242424;
 }
 
 .hero-image{
   width:100%;
   min-height:220px;
   object-fit:cover;
-  background:#4d0d0d;
+  background:#242424;
 }
 
 .hero-message{
@@ -265,9 +265,9 @@ a{
   background:
     linear-gradient(
       135deg,
-      var(--wine-dark),
-      var(--wine),
-      #953120
+      #242424,
+      #5b3b28 52%,
+      #a52f37
     );
   border-top:3px solid var(--yellow);
   text-align:center;
@@ -275,7 +275,7 @@ a{
 
 .hero-message strong{
   display:block;
-  color:#fff3c7;
+  color:#ffe8b1;
   font-size:24px;
 }
 
@@ -290,7 +290,7 @@ a{
   display:grid;
   grid-template-columns:repeat(2,1fr);
   gap:12px;
-  background:#fff4d9;
+  background:#e8d5bc;
   border-bottom:1px solid var(--border);
 }
 
@@ -301,9 +301,9 @@ a{
   flex-direction:column;
   align-items:center;
   justify-content:center;
-  color:var(--wine-dark);
-  background:#fff;
-  border:2px solid #e7c98d;
+  color:#292725;
+  background:#fffaf0;
+  border:2px solid #ae7a4d;
   border-radius:18px;
   box-shadow:0 5px 13px rgba(79,39,14,.1);
   text-align:center;
@@ -323,7 +323,7 @@ main{
 .section{
   margin:0 0 22px;
   padding:20px 16px;
-  background:#fff;
+  background:#fffaf1;
   border:1px solid var(--border);
   border-radius:24px;
   box-shadow:var(--shadow);
@@ -334,7 +334,7 @@ main{
   display:flex;
   align-items:center;
   gap:10px;
-  color:var(--wine-dark);
+  color:#292725;
   font-size:25px;
   font-weight:900;
 }
@@ -347,7 +347,8 @@ main{
   background:
     linear-gradient(
       90deg,
-      var(--yellow),
+      #bd343c,
+      #e4ad43,
       transparent
     );
 }
@@ -360,8 +361,8 @@ main{
 
 .owner-box{
   padding:17px;
-  background:#fff8e8;
-  border:2px solid #efd497;
+  background:#eee0cb;
+  border:2px solid #b98555;
   border-radius:18px;
 }
 
@@ -371,7 +372,7 @@ main{
 
 .owner-sign{
   margin-top:10px;
-  color:var(--wine);
+  color:#a52f37;
   text-align:right;
   font-weight:900;
 }
@@ -383,7 +384,7 @@ main{
 
 .menu-card{
   overflow:hidden;
-  background:var(--cream);
+  background:#f5e8d4;
   border:1px solid var(--border);
   border-radius:20px;
 }
@@ -411,7 +412,7 @@ main{
   margin-bottom:8px;
   padding:4px 10px;
   color:#fff;
-  background:var(--wine);
+  background:#a52f37;
   border-radius:999px;
   font-size:14px;
   font-weight:900;
@@ -419,7 +420,7 @@ main{
 
 .menu-name{
   margin:0;
-  color:var(--wine-dark);
+  color:#2c2926;
   font-size:24px;
   font-weight:900;
 }
@@ -438,13 +439,13 @@ main{
 .news-card,
 .review-card{
   padding:16px;
-  background:#fff9eb;
-  border:1px solid #ead39e;
+  background:#f7ecdb;
+  border:1px solid #d0ae7d;
   border-radius:18px;
 }
 
 .news-card{
-  border-left:7px solid var(--wine);
+  border-left:7px solid #ad3038;
 }
 
 .news-date{
@@ -456,7 +457,7 @@ main{
 
 .news-title{
   margin:0;
-  color:var(--wine-dark);
+  color:#2c2926;
   font-size:20px;
   font-weight:900;
 }
@@ -471,7 +472,7 @@ main{
 .dynamic-message{
   padding:18px 14px;
   color:var(--gray);
-  background:#f8f3e8;
+  background:#eee2d0;
   border-radius:15px;
   text-align:center;
   font-size:15px;
@@ -520,7 +521,7 @@ main{
   align-items:center;
   justify-content:center;
   color:#fff;
-  background:var(--blue);
+  background:#a52f37;
   border-radius:14px;
   text-align:center;
   text-decoration:none;
@@ -529,7 +530,7 @@ main{
 }
 
 .news-link-button.external{
-  background:var(--green);
+  background:#3d7452;
 }
 
 .gallery{
@@ -635,24 +636,24 @@ main{
   background:
     linear-gradient(
       135deg,
-      #b52f27,
-      var(--wine)
+      #d23b47,
+      #8f252e
     );
 }
 
 .secondary-button{
   margin-top:10px;
-  color:var(--wine-dark);
-  background:#ffe7a7;
-  border:2px solid #d7ac4f;
+  color:#2c2926;
+  background:#e6bd65;
+  border:2px solid #9f6c3d;
 }
 
 .map-button{
-  background:var(--green);
+  background:#3d7452;
 }
 
 .phone-button{
-  background:var(--blue);
+  background:#2f3435;
 }
 
 .facebook-button{
@@ -696,8 +697,8 @@ main{
 }
 
 .info-label{
-  color:var(--wine-dark);
-  background:#f4e3bb;
+  color:#2d2925;
+  background:#d7b07a;
   font-weight:900;
 }
 
@@ -724,14 +725,15 @@ main{
     26px
     16px
     calc(110px + env(safe-area-inset-bottom));
-  color:#fbe8bd;
-  background:var(--wine-dark);
+  color:#f4d18b;
+  background:#242424;
+  border-top:5px solid #8a5c37;
   text-align:center;
 }
 
 .footer-title{
   margin:0;
-  color:#fff;
+  color:#ffe5a6;
   font-size:24px;
   font-weight:900;
 }
@@ -744,7 +746,7 @@ main{
 .footer-admin{
   display:inline-block;
   margin-top:18px;
-  color:#f8d884;
+  color:#e9a8ad;
   font-size:13px;
 }
 
@@ -762,10 +764,10 @@ main{
   background:
     linear-gradient(
       135deg,
-      #b92f28,
-      #721212
+      #d23b47,
+      #7d252d
     );
-  border:3px solid #ffdf83;
+  border:3px solid #edbd57;
   border-radius:22px;
   box-shadow:0 9px 28px rgba(57,11,7,.35);
   transform:translateX(-50%);
