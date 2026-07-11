@@ -514,6 +514,23 @@ main{
   gap:8px;
 }
 
+.news-video{
+  width:100%;
+  aspect-ratio:16/9;
+  margin-top:13px;
+  overflow:hidden;
+  background:#000;
+  border:1px solid var(--border);
+  border-radius:15px;
+}
+
+.news-video iframe{
+  width:100%;
+  height:100%;
+  display:block;
+  border:0;
+}
+
 .news-link-button{
   min-height:52px;
   padding:11px 14px;
@@ -1415,22 +1432,12 @@ function renderNews(){
             item.title
           );
 
+        const videoContent =
+          renderVideoContent(
+            item.videoUrl
+          );
+
         const links = [];
-
-        if(item.videoUrl){
-
-          links.push(`
-            <a
-              class="news-link-button"
-              href="${escapeAttribute(item.videoUrl)}"
-              target="_blank"
-              rel="noopener"
-            >
-              ▶ 動画を見る
-            </a>
-          `);
-
-        }
 
         if(item.externalUrl){
 
@@ -1462,6 +1469,8 @@ function renderNews(){
 
             ${images}
 
+            ${videoContent}
+
             ${
               links.length
                 ? `<div class="news-link-row">${links.join("")}</div>`
@@ -1475,6 +1484,78 @@ function renderNews(){
 
       }
     ).join("");
+
+}
+
+
+function renderVideoContent(url){
+
+  if(!url){
+    return "";
+  }
+
+  const videoId =
+    youtubeVideoId(url);
+
+  if(videoId){
+
+    return `
+      <div class="news-video">
+        <iframe
+          src="https://www.youtube-nocookie.com/embed/${videoId}?rel=0"
+          title="YouTube動画"
+          loading="lazy"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen
+        ></iframe>
+      </div>
+    `;
+
+  }
+
+  return `
+    <div class="news-link-row">
+      <a
+        class="news-link-button"
+        href="${escapeAttribute(url)}"
+        target="_blank"
+        rel="noopener"
+      >
+        ▶ 動画を見る
+      </a>
+    </div>
+  `;
+
+}
+
+
+function youtubeVideoId(value){
+
+  const text =
+    String(value || "").trim();
+
+  const patterns = [
+    /[?&]v=([A-Za-z0-9_-]{6,})/,
+    /youtu\.be\/([A-Za-z0-9_-]{6,})/,
+    /youtube\.com\/shorts\/([A-Za-z0-9_-]{6,})/,
+    /youtube\.com\/embed\/([A-Za-z0-9_-]{6,})/,
+    /youtube\.com\/live\/([A-Za-z0-9_-]{6,})/
+  ];
+
+  for(
+    const pattern of patterns
+  ){
+
+    const match =
+      text.match(pattern);
+
+    if(match && match[1]){
+      return match[1];
+    }
+
+  }
+
+  return "";
 
 }
 
