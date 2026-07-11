@@ -623,6 +623,11 @@ select:focus{
   background:var(--blue);
 }
 
+.action-button.delete{
+  grid-column:1 / -1;
+  background:#4b0d0d;
+}
+
 .news-form{
   margin-bottom:18px;
 }
@@ -1138,7 +1143,7 @@ select:focus{
 <script>
 
 const GAS_URL =
-  "https://script.google.com/macros/s/AKfycbz77QIYPX0z4er8nRAMhP5FK3E3xB1ib0pPObaSIEbj99Z7dK4BZ-q5H5SQ0MX7p_tm4Q/exec";
+  "https://script.google.com/macros/s/AKfycbyC5VN3w3hDcJB13eK9YL9x5ulg7T-P3h0hpo5eLm7i6js4uOJ731pP0QMCAigCxGTyBQ/exec";
 
 const MAX_PHOTOS = 5;
 const MAX_FILE_SIZE = 20 * 1024 * 1024;
@@ -2214,6 +2219,14 @@ function renderNews(){
                   非公開
                 </button>
 
+                <button
+                  class="action-button delete"
+                  type="button"
+                  data-news-action="削除"
+                >
+                  この記事を削除する
+                </button>
+
               </div>
 
             </div>
@@ -2268,11 +2281,90 @@ async function handleNewsAction(event){
 
   }
 
+  if(action === "削除"){
+
+    await deleteNewsItem(
+      item,
+      card
+    );
+
+    return;
+
+  }
+
   await saveNewsItem(
     item,
     action,
     card
   );
+
+}
+
+
+async function deleteNewsItem(
+  item,
+  card
+){
+
+  const confirmed =
+    window.confirm(
+      "この記事を完全に削除します。\n削除した記事は元に戻せません。\n本当に削除しますか？"
+    );
+
+  if(!confirmed){
+    return;
+  }
+
+  setCardDisabled(
+    card,
+    true
+  );
+
+  showMessage(
+    adminStatus,
+    "お知らせを削除しています…",
+    "info"
+  );
+
+  try{
+
+    await apiRequest({
+      mode:"adminNewsDelete",
+      adminPassword:
+        adminPassword,
+      newsId:
+        item.id
+    });
+
+    if(
+      newsIdInput.value ===
+      item.id
+    ){
+      resetNewsForm();
+    }
+
+    await loadNewsOnly();
+
+    showMessage(
+      adminStatus,
+      "お知らせを削除しました。",
+      "success"
+    );
+
+  }catch(error){
+
+    setCardDisabled(
+      card,
+      false
+    );
+
+    showMessage(
+      adminStatus,
+      getErrorMessage(error),
+      "error"
+    );
+
+  }
 
 }
 
