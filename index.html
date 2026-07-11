@@ -1,1129 +1,1202 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1, viewport-fit=cover"
-  >
-
-  <meta
-    name="description"
-    content="埼玉県志木市の老舗飲食店・長崎亭を地域のみんなで応援するDXページです。お店のお知らせ、おすすめメニュー、写真投稿、口コミ、アクセス情報をご覧いただけます。"
-  >
-
-  <meta name="theme-color" content="#7b1717">
-
-  <title>長崎亭｜地域のお店応援DX</title>
-
-  <link
-    rel="icon"
-    type="image/png"
-    href="アプリアイコン.png"
-  >
-
-  <link
-    rel="apple-touch-icon"
-    href="アプリアイコン.png"
-  >
-
-  <style>
-    :root {
-      --wine: #7b1717;
-      --wine-dark: #4d0d0d;
-      --wine-light: #a62a24;
-      --cream: #fff8e8;
-      --cream-dark: #f3e3bd;
-      --yellow: #f6c85f;
-      --brown: #4b2a18;
-      --brown-light: #754326;
-      --green: #287a45;
-      --blue: #146aa3;
-      --text: #2d2118;
-      --white: #ffffff;
-      --gray: #766d65;
-      --border: #dec99c;
-      --shadow: 0 8px 24px rgba(66, 34, 13, 0.12);
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      margin: 0;
-      background:
-        radial-gradient(
-          circle at top,
-          #fffdf6 0,
-          var(--cream) 38%,
-          #f5ead2 100%
-        );
-      color: var(--text);
-      font-family:
-        "Hiragino Sans",
-        "Yu Gothic",
-        "Meiryo",
-        sans-serif;
-      font-size: 18px;
-      line-height: 1.75;
-      -webkit-text-size-adjust: 100%;
-    }
-
-    img {
-      max-width: 100%;
-      display: block;
-    }
-
-    button,
-    input,
-    textarea,
-    select {
-      font: inherit;
-    }
-
-    button,
-    a {
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    a {
-      color: inherit;
-    }
-
-    .page {
-      width: min(100%, 760px);
-      margin: 0 auto;
-      background: rgba(255, 253, 247, 0.94);
-      min-height: 100vh;
-      overflow: hidden;
-      box-shadow: 0 0 36px rgba(53, 27, 10, 0.13);
-    }
-
-    .topbar {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      min-height: 68px;
-      padding:
-        calc(8px + env(safe-area-inset-top))
-        14px
-        8px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      background: rgba(83, 14, 14, 0.97);
-      color: var(--white);
-      border-bottom: 3px solid var(--yellow);
-      backdrop-filter: blur(10px);
-    }
-
-    .topbar-logo {
-      width: 50px;
-      height: 50px;
-      flex: 0 0 50px;
-      border-radius: 14px;
-      object-fit: cover;
-      border: 2px solid #f3cf75;
-      background: var(--cream);
-    }
-
-    .topbar-text {
-      min-width: 0;
-    }
-
-    .topbar-title {
-      margin: 0;
-      font-size: 22px;
-      font-weight: 900;
-      line-height: 1.2;
-      letter-spacing: 0.04em;
-    }
-
-    .topbar-sub {
-      margin: 3px 0 0;
-      font-size: 13px;
-      line-height: 1.25;
-      color: #ffe7a8;
-      font-weight: 700;
-    }
-
-    .hero {
-      background: var(--wine-dark);
-    }
-
-    .hero-image {
-      width: 100%;
-      min-height: 220px;
-      object-fit: cover;
-      background: linear-gradient(
-        135deg,
-        #8d2b1f,
-        #3e130b
-      );
-    }
-
-    .hero-message {
-      padding: 18px 18px 20px;
-      text-align: center;
-      color: var(--white);
-      background:
-        linear-gradient(
-          135deg,
-          var(--wine-dark),
-          var(--wine),
-          #953120
-        );
-      border-top: 3px solid var(--yellow);
-    }
-
-    .hero-message strong {
-      display: block;
-      font-size: 24px;
-      line-height: 1.45;
-      color: #fff3c7;
-    }
-
-    .hero-message span {
-      display: block;
-      margin-top: 8px;
-      font-size: 16px;
-    }
-
-    .quick-nav {
-      padding: 16px;
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-      background: #fff4d9;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .quick-button {
-      min-height: 72px;
-      padding: 12px 10px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 3px;
-      border-radius: 18px;
-      text-align: center;
-      text-decoration: none;
-      color: var(--wine-dark);
-      background: var(--white);
-      border: 2px solid #e7c98d;
-      box-shadow: 0 5px 13px rgba(79, 39, 14, 0.1);
-      font-weight: 900;
-      font-size: 17px;
-      line-height: 1.35;
-    }
-
-    .quick-button .icon {
-      font-size: 28px;
-      line-height: 1;
-    }
-
-    .quick-button:active {
-      transform: scale(0.98);
-    }
-
-    main {
-      padding: 18px 14px 120px;
-    }
-
-    .section {
-      margin: 0 0 22px;
-      padding: 20px 16px;
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: 24px;
-      box-shadow: var(--shadow);
-    }
-
-    .section-heading {
-      margin: 0 0 15px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      color: var(--wine-dark);
-      font-size: 25px;
-      font-weight: 900;
-      line-height: 1.35;
-      letter-spacing: 0.02em;
-    }
-
-    .section-heading::after {
-      content: "";
-      flex: 1;
-      height: 3px;
-      border-radius: 99px;
-      background: linear-gradient(
-        90deg,
-        var(--yellow),
-        transparent
-      );
-    }
-
-    .lead {
-      margin: 0;
-      font-size: 18px;
-      line-height: 1.9;
-    }
-
-    .owner-box {
-      padding: 17px;
-      background: #fff8e8;
-      border: 2px solid #efd497;
-      border-radius: 18px;
-    }
-
-    .owner-box p {
-      margin: 0;
-      font-size: 18px;
-      line-height: 1.9;
-    }
-
-    .owner-sign {
-      margin-top: 10px;
-      text-align: right;
-      font-weight: 900;
-      color: var(--wine);
-    }
-
-    .menu-list {
-      display: grid;
-      gap: 18px;
-    }
-
-    .menu-card {
-      overflow: hidden;
-      border-radius: 20px;
-      background: var(--cream);
-      border: 1px solid var(--border);
-    }
-
-    .menu-image {
-      width: 100%;
-      height: 245px;
-      object-fit: cover;
-      background: #eadbbd;
-    }
-
-    .menu-content {
-      padding: 16px;
-    }
-
-    .menu-name {
-      margin: 0;
-      color: var(--wine-dark);
-      font-size: 24px;
-      line-height: 1.4;
-      font-weight: 900;
-    }
-
-    .menu-label {
-      display: inline-block;
-      margin-bottom: 8px;
-      padding: 4px 10px;
-      border-radius: 999px;
-      color: var(--white);
-      background: var(--wine);
-      font-size: 14px;
-      font-weight: 900;
-    }
-
-    .menu-description {
-      margin: 8px 0 0;
-      font-size: 17px;
-      line-height: 1.8;
-    }
-
-    .news-list {
-      display: grid;
-      gap: 13px;
-    }
-
-    .news-card {
-      padding: 15px;
-      border-radius: 17px;
-      background: #fff9eb;
-      border-left: 7px solid var(--wine);
-    }
-
-    .news-date {
-      margin: 0 0 3px;
-      color: var(--gray);
-      font-size: 14px;
-      font-weight: 800;
-    }
-
-    .news-title {
-      margin: 0;
-      font-size: 19px;
-      font-weight: 900;
-      color: var(--wine-dark);
-    }
-
-    .news-text {
-      margin: 6px 0 0;
-      font-size: 16px;
-    }
-
-    .notice {
-      margin-top: 13px;
-      padding: 12px;
-      border-radius: 14px;
-      background: #f8f3e8;
-      color: #655a50;
-      font-size: 15px;
-    }
-
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
-    }
-
-    .gallery-item {
-      overflow: hidden;
-      border-radius: 15px;
-      background: #eee1c6;
-      border: 1px solid var(--border);
-    }
-
-    .gallery-item:first-child {
-      grid-column: 1 / -1;
-    }
-
-    .gallery-image {
-      width: 100%;
-      height: 190px;
-      object-fit: cover;
-    }
-
-    .gallery-item:first-child .gallery-image {
-      height: 250px;
-    }
-
-    .review-sample {
-      padding: 16px;
-      border-radius: 18px;
-      background: #fff9eb;
-      border: 1px solid #ead39e;
-    }
-
-    .review-stars {
-      color: #e09a00;
-      font-size: 27px;
-      letter-spacing: 2px;
-      line-height: 1.2;
-    }
-
-    .review-text {
-      margin: 8px 0;
-      font-size: 17px;
-    }
-
-    .review-name {
-      margin: 0;
-      color: var(--gray);
-      font-size: 14px;
-      font-weight: 800;
-    }
-
-    .share-title {
-      margin: 13px 0 8px;
-      color: var(--brown);
-      font-size: 15px;
-      font-weight: 900;
-    }
-
-    .share-row {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 7px;
-    }
-
-    .share-button {
-      min-height: 50px;
-      padding: 8px 4px;
-      border: 0;
-      border-radius: 13px;
-      color: var(--white);
-      font-size: 13px;
-      font-weight: 900;
-      cursor: pointer;
-    }
-
-    .share-line {
-      background: #06c755;
-    }
-
-    .share-x {
-      background: #111111;
-    }
-
-    .share-facebook {
-      background: #1769aa;
-    }
-
-    .share-copy {
-      background: #72533a;
-    }
-
-    .primary-button,
-    .secondary-button,
-    .map-button,
-    .phone-button,
-    .facebook-button {
-      width: 100%;
-      min-height: 62px;
-      padding: 14px 18px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      border: 0;
-      border-radius: 18px;
-      text-decoration: none;
-      text-align: center;
-      color: var(--white);
-      font-size: 19px;
-      line-height: 1.4;
-      font-weight: 900;
-      cursor: pointer;
-      box-shadow: 0 7px 17px rgba(65, 31, 11, 0.17);
-    }
-
-    .primary-button {
-      background: linear-gradient(
-        135deg,
-        #b52f27,
-        var(--wine)
-      );
-    }
-
-    .secondary-button {
-      margin-top: 10px;
-      color: var(--wine-dark);
-      background: #ffe7a7;
-      border: 2px solid #d7ac4f;
-    }
-
-    .map-button {
-      background: var(--green);
-    }
-
-    .phone-button {
-      background: var(--blue);
-    }
-
-    .facebook-button {
-      background: #1877f2;
-    }
-
-    .primary-button:active,
-    .secondary-button:active,
-    .map-button:active,
-    .phone-button:active,
-    .facebook-button:active {
-      transform: scale(0.985);
-    }
-
-    .button-stack {
-      display: grid;
-      gap: 11px;
-    }
-
-    .shop-photo {
-      width: 100%;
-      max-height: 390px;
-      object-fit: cover;
-      border-radius: 18px;
-      border: 1px solid var(--border);
-      background: #eadcc2;
-    }
-
-    .info-table {
-      margin-top: 15px;
-      display: grid;
-      gap: 0;
-      overflow: hidden;
-      border-radius: 17px;
-      border: 1px solid var(--border);
-    }
-
-    .info-row {
-      display: grid;
-      grid-template-columns: 92px 1fr;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .info-row:last-child {
-      border-bottom: 0;
-    }
-
-    .info-label,
-    .info-value {
-      padding: 13px 12px;
-      font-size: 16px;
-    }
-
-    .info-label {
-      background: #f4e3bb;
-      color: var(--wine-dark);
-      font-weight: 900;
-    }
-
-    .info-value {
-      background: #fffdf7;
-      overflow-wrap: anywhere;
-    }
-
-    .map-wrap {
-      margin-top: 15px;
-      overflow: hidden;
-      border-radius: 18px;
-      border: 1px solid var(--border);
-      background: #eee;
-    }
-
-    .map-wrap iframe {
-      width: 100%;
-      height: 330px;
-      display: block;
-      border: 0;
-    }
-
-    .footer {
-      padding:
-        26px
-        16px
-        calc(110px + env(safe-area-inset-bottom));
-      text-align: center;
-      color: #fbe8bd;
-      background: var(--wine-dark);
-    }
-
-    .footer-title {
-      margin: 0;
-      color: var(--white);
-      font-size: 24px;
-      font-weight: 900;
-    }
-
-    .footer-text {
-      margin: 8px 0 0;
-      font-size: 14px;
-    }
-
-    .footer-admin {
-      display: inline-block;
-      margin-top: 18px;
-      color: #f8d884;
-      font-size: 13px;
-    }
-
-    .fixed-post {
-      position: fixed;
-      z-index: 120;
-      left: 50%;
-      bottom: calc(12px + env(safe-area-inset-bottom));
-      width: min(calc(100% - 24px), 720px);
-      transform: translateX(-50%);
-      padding: 15px 18px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 9px;
-      border: 3px solid #ffdf83;
-      border-radius: 22px;
-      color: var(--white);
-      background:
-        linear-gradient(
-          135deg,
-          #b92f28,
-          #721212
-        );
-      box-shadow:
-        0 9px 28px rgba(57, 11, 7, 0.35);
-      text-align: center;
-      text-decoration: none;
-      font-size: 20px;
-      line-height: 1.3;
-      font-weight: 900;
-    }
-
-    .fixed-post:active {
-      transform: translateX(-50%) scale(0.985);
-    }
-
-    .toast {
-      position: fixed;
-      z-index: 200;
-      left: 50%;
-      bottom: 100px;
-      width: min(calc(100% - 40px), 500px);
-      padding: 14px 18px;
-      transform: translateX(-50%) translateY(30px);
-      border-radius: 15px;
-      color: var(--white);
-      background: rgba(45, 33, 24, 0.95);
-      text-align: center;
-      font-size: 16px;
-      font-weight: 800;
-      opacity: 0;
-      pointer-events: none;
-      transition: 0.25s;
-    }
-
-    .toast.show {
-      opacity: 1;
-      transform: translateX(-50%) translateY(0);
-    }
-
-    .image-hidden {
-      display: none !important;
-    }
-
-    @media (min-width: 640px) {
-      .quick-nav {
-        grid-template-columns: repeat(4, 1fr);
-      }
-
-      .menu-list {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .gallery {
-        grid-template-columns: repeat(3, 1fr);
-      }
-
-      .gallery-item:first-child {
-        grid-column: auto;
-      }
-
-      .gallery-image,
-      .gallery-item:first-child .gallery-image {
-        height: 220px;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width,initial-scale=1,viewport-fit=cover"
+>
+
+<title>長崎亭｜地域のお店応援DX</title>
+
+<meta
+  name="description"
+  content="埼玉県志木市で愛される長崎亭。おすすめメニュー、お知らせ、写真・口コミ、店舗情報をご覧いただけます。"
+>
+
+<meta name="theme-color" content="#7b1717">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta
+  name="apple-mobile-web-app-capable"
+  content="yes"
+>
+
+<meta
+  name="apple-mobile-web-app-status-bar-style"
+  content="black-translucent"
+>
+
+<meta
+  name="apple-mobile-web-app-title"
+  content="長崎亭"
+>
+
+<link
+  rel="canonical"
+  href="https://ichirohns-jpg.github.io/nagasakitei-shop-dx/"
+>
+
+<link
+  rel="manifest"
+  href="manifest.json?v=4"
+>
+
+<link
+  rel="icon"
+  type="image/png"
+  href="アプリアイコン.png?v=4"
+>
+
+<link
+  rel="shortcut icon"
+  type="image/png"
+  href="アプリアイコン.png?v=4"
+>
+
+<link
+  rel="apple-touch-icon"
+  href="アプリアイコン.png?v=4"
+>
+
+<link
+  rel="apple-touch-icon"
+  sizes="180x180"
+  href="アプリアイコン.png?v=4"
+>
+
+<meta property="og:type" content="website">
+
+<meta
+  property="og:site_name"
+  content="長崎亭 お店応援DX"
+>
+
+<meta
+  property="og:title"
+  content="長崎亭｜地域のお店応援DX"
+>
+
+<meta
+  property="og:description"
+  content="志木市で愛される長崎亭。昔ながらのちゃんぽん・皿うどん、お知らせ、写真・口コミ、店舗情報をご覧いただけます。"
+>
+
+<meta
+  property="og:url"
+  content="https://ichirohns-jpg.github.io/nagasakitei-shop-dx/"
+>
+
+<meta
+  property="og:image"
+  content="https://ichirohns-jpg.github.io/nagasakitei-shop-dx/%E3%83%90%E3%83%8A%E3%83%BC%E3%83%A1%E3%82%A4%E3%83%B3.png?v=4"
+>
+
+<meta
+  property="og:image:secure_url"
+  content="https://ichirohns-jpg.github.io/nagasakitei-shop-dx/%E3%83%90%E3%83%8A%E3%83%BC%E3%83%A1%E3%82%A4%E3%83%B3.png?v=4"
+>
+
+<meta
+  property="og:image:type"
+  content="image/png"
+>
+
+<meta
+  property="og:image:width"
+  content="1280"
+>
+
+<meta
+  property="og:image:height"
+  content="426"
+>
+
+<meta
+  property="og:image:alt"
+  content="長崎亭 創業1976年 昔ながらのちゃんぽん・皿うどん"
+>
+
+<meta
+  name="twitter:card"
+  content="summary_large_image"
+>
+
+<meta
+  name="twitter:title"
+  content="長崎亭｜地域のお店応援DX"
+>
+
+<meta
+  name="twitter:description"
+  content="志木市で愛される長崎亭を地域のみんなで応援するDXです。"
+>
+
+<meta
+  name="twitter:image"
+  content="https://ichirohns-jpg.github.io/nagasakitei-shop-dx/%E3%83%90%E3%83%8A%E3%83%BC%E3%83%A1%E3%82%A4%E3%83%B3.png?v=4"
+>
+
+<style>
+
+:root{
+  --wine:#7b1717;
+  --wine-dark:#4d0d0d;
+  --wine-light:#a62a24;
+  --cream:#fff8e8;
+  --cream-dark:#f3e3bd;
+  --yellow:#f6c85f;
+  --brown:#4b2a18;
+  --green:#287a45;
+  --blue:#146aa3;
+  --text:#2d2118;
+  --white:#ffffff;
+  --gray:#766d65;
+  --border:#dec99c;
+  --shadow:0 8px 24px rgba(66,34,13,.12);
+}
+
+*{
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  background:
+    radial-gradient(
+      circle at top,
+      #fffdf6 0,
+      var(--cream) 38%,
+      #f5ead2 100%
+    );
+  color:var(--text);
+  font-family:
+    "Hiragino Sans",
+    "Yu Gothic",
+    "Meiryo",
+    sans-serif;
+  font-size:18px;
+  line-height:1.75;
+  -webkit-text-size-adjust:100%;
+}
+
+img{
+  display:block;
+  max-width:100%;
+}
+
+button,
+input,
+textarea,
+select{
+  font:inherit;
+}
+
+button,
+a{
+  -webkit-tap-highlight-color:transparent;
+}
+
+a{
+  color:inherit;
+}
+
+.page{
+  width:min(100%,760px);
+  min-height:100vh;
+  margin:0 auto;
+  overflow:hidden;
+  background:rgba(255,253,247,.94);
+  box-shadow:0 0 36px rgba(53,27,10,.13);
+}
+
+.topbar{
+  position:sticky;
+  top:0;
+  z-index:100;
+  min-height:68px;
+  padding:
+    calc(8px + env(safe-area-inset-top))
+    14px
+    8px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  color:var(--white);
+  background:rgba(83,14,14,.97);
+  border-bottom:3px solid var(--yellow);
+  backdrop-filter:blur(10px);
+}
+
+.topbar-logo{
+  width:50px;
+  height:50px;
+  flex:0 0 50px;
+  object-fit:cover;
+  border:2px solid #f3cf75;
+  border-radius:14px;
+  background:var(--cream);
+}
+
+.topbar-title{
+  margin:0;
+  font-size:22px;
+  font-weight:900;
+  line-height:1.2;
+}
+
+.topbar-sub{
+  margin:3px 0 0;
+  color:#ffe7a8;
+  font-size:13px;
+  font-weight:700;
+}
+
+.hero{
+  background:var(--wine-dark);
+}
+
+.hero-image{
+  width:100%;
+  min-height:220px;
+  object-fit:cover;
+  background:#4d0d0d;
+}
+
+.hero-message{
+  padding:18px 18px 20px;
+  text-align:center;
+  color:#fff;
+  background:
+    linear-gradient(
+      135deg,
+      var(--wine-dark),
+      var(--wine),
+      #953120
+    );
+  border-top:3px solid var(--yellow);
+}
+
+.hero-message strong{
+  display:block;
+  color:#fff3c7;
+  font-size:24px;
+  line-height:1.45;
+}
+
+.hero-message span{
+  display:block;
+  margin-top:8px;
+  font-size:16px;
+}
+
+.quick-nav{
+  padding:16px;
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+  background:#fff4d9;
+  border-bottom:1px solid var(--border);
+}
+
+.quick-button{
+  min-height:72px;
+  padding:12px 10px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  color:var(--wine-dark);
+  background:#fff;
+  border:2px solid #e7c98d;
+  border-radius:18px;
+  box-shadow:0 5px 13px rgba(79,39,14,.1);
+  text-align:center;
+  text-decoration:none;
+  font-size:17px;
+  font-weight:900;
+}
+
+.quick-button .icon{
+  font-size:28px;
+}
+
+main{
+  padding:18px 14px 120px;
+}
+
+.section{
+  margin:0 0 22px;
+  padding:20px 16px;
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:24px;
+  box-shadow:var(--shadow);
+}
+
+.section-heading{
+  margin:0 0 15px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  color:var(--wine-dark);
+  font-size:25px;
+  font-weight:900;
+}
+
+.section-heading::after{
+  content:"";
+  flex:1;
+  height:3px;
+  border-radius:99px;
+  background:
+    linear-gradient(
+      90deg,
+      var(--yellow),
+      transparent
+    );
+}
+
+.lead{
+  margin:0;
+  font-size:18px;
+  line-height:1.9;
+}
+
+.owner-box{
+  padding:17px;
+  background:#fff8e8;
+  border:2px solid #efd497;
+  border-radius:18px;
+}
+
+.owner-box p{
+  margin:0;
+  line-height:1.9;
+}
+
+.owner-sign{
+  margin-top:10px;
+  color:var(--wine);
+  text-align:right;
+  font-weight:900;
+}
+
+.menu-list{
+  display:grid;
+  gap:18px;
+}
+
+.menu-card{
+  overflow:hidden;
+  background:var(--cream);
+  border:1px solid var(--border);
+  border-radius:20px;
+}
+
+.menu-image{
+  width:100%;
+  height:245px;
+  object-fit:cover;
+  background:#eadbbd;
+}
+
+.menu-content{
+  padding:16px;
+}
+
+.menu-label{
+  display:inline-block;
+  margin-bottom:8px;
+  padding:4px 10px;
+  color:#fff;
+  background:var(--wine);
+  border-radius:999px;
+  font-size:14px;
+  font-weight:900;
+}
+
+.menu-name{
+  margin:0;
+  color:var(--wine-dark);
+  font-size:24px;
+  font-weight:900;
+}
+
+.menu-description{
+  margin:8px 0 0;
+  font-size:17px;
+  line-height:1.8;
+}
+
+.news-list{
+  display:grid;
+  gap:13px;
+}
+
+.news-card{
+  padding:15px;
+  background:#fff9eb;
+  border-left:7px solid var(--wine);
+  border-radius:17px;
+}
+
+.news-date{
+  margin:0 0 3px;
+  color:var(--gray);
+  font-size:14px;
+  font-weight:800;
+}
+
+.news-title{
+  margin:0;
+  color:var(--wine-dark);
+  font-size:19px;
+  font-weight:900;
+}
+
+.news-text{
+  margin:6px 0 0;
+  font-size:16px;
+}
+
+.notice{
+  margin-top:13px;
+  padding:12px;
+  color:#655a50;
+  background:#f8f3e8;
+  border-radius:14px;
+  font-size:15px;
+}
+
+.gallery{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
+}
+
+.gallery-item{
+  overflow:hidden;
+  background:#eee1c6;
+  border:1px solid var(--border);
+  border-radius:15px;
+}
+
+.gallery-item:first-child{
+  grid-column:1/-1;
+}
+
+.gallery-image{
+  width:100%;
+  height:190px;
+  object-fit:cover;
+}
+
+.gallery-item:first-child .gallery-image{
+  height:250px;
+}
+
+.review-sample{
+  padding:16px;
+  background:#fff9eb;
+  border:1px solid #ead39e;
+  border-radius:18px;
+}
+
+.review-stars{
+  color:#e09a00;
+  font-size:27px;
+  letter-spacing:2px;
+}
+
+.review-text{
+  margin:8px 0;
+}
+
+.review-name{
+  margin:0;
+  color:var(--gray);
+  font-size:14px;
+  font-weight:800;
+}
+
+.share-title{
+  margin:13px 0 8px;
+  font-size:15px;
+  font-weight:900;
+}
+
+.share-row{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:7px;
+}
+
+.share-button{
+  min-height:50px;
+  padding:8px 4px;
+  color:#fff;
+  border:0;
+  border-radius:13px;
+  font-size:13px;
+  font-weight:900;
+}
+
+.share-line{
+  background:#06c755;
+}
+
+.share-x{
+  background:#111;
+}
+
+.share-facebook{
+  background:#1769aa;
+}
+
+.share-copy{
+  background:#72533a;
+}
+
+.primary-button,
+.secondary-button,
+.map-button,
+.phone-button,
+.facebook-button{
+  width:100%;
+  min-height:62px;
+  padding:14px 18px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#fff;
+  border:0;
+  border-radius:18px;
+  box-shadow:0 7px 17px rgba(65,31,11,.17);
+  text-align:center;
+  text-decoration:none;
+  font-size:19px;
+  font-weight:900;
+}
+
+.primary-button{
+  background:
+    linear-gradient(
+      135deg,
+      #b52f27,
+      var(--wine)
+    );
+}
+
+.secondary-button{
+  margin-top:10px;
+  color:var(--wine-dark);
+  background:#ffe7a7;
+  border:2px solid #d7ac4f;
+}
+
+.map-button{
+  background:var(--green);
+}
+
+.phone-button{
+  background:var(--blue);
+}
+
+.facebook-button{
+  background:#1877f2;
+}
+
+.button-stack{
+  display:grid;
+  gap:11px;
+}
+
+.shop-photo{
+  width:100%;
+  max-height:390px;
+  object-fit:cover;
+  border:1px solid var(--border);
+  border-radius:18px;
+}
+
+.info-table{
+  margin-top:15px;
+  overflow:hidden;
+  border:1px solid var(--border);
+  border-radius:17px;
+}
+
+.info-row{
+  display:grid;
+  grid-template-columns:92px 1fr;
+  border-bottom:1px solid var(--border);
+}
+
+.info-row:last-child{
+  border-bottom:0;
+}
+
+.info-label,
+.info-value{
+  padding:13px 12px;
+  font-size:16px;
+}
+
+.info-label{
+  color:var(--wine-dark);
+  background:#f4e3bb;
+  font-weight:900;
+}
+
+.info-value{
+  background:#fffdf7;
+}
+
+.map-wrap{
+  margin-top:15px;
+  overflow:hidden;
+  border:1px solid var(--border);
+  border-radius:18px;
+}
+
+.map-wrap iframe{
+  width:100%;
+  height:330px;
+  display:block;
+  border:0;
+}
+
+.footer{
+  padding:
+    26px
+    16px
+    calc(110px + env(safe-area-inset-bottom));
+  color:#fbe8bd;
+  background:var(--wine-dark);
+  text-align:center;
+}
+
+.footer-title{
+  margin:0;
+  color:#fff;
+  font-size:24px;
+  font-weight:900;
+}
+
+.footer-text{
+  margin:8px 0 0;
+  font-size:14px;
+}
+
+.footer-admin{
+  display:inline-block;
+  margin-top:18px;
+  color:#f8d884;
+  font-size:13px;
+}
+
+.fixed-post{
+  position:fixed;
+  left:50%;
+  bottom:calc(12px + env(safe-area-inset-bottom));
+  z-index:120;
+  width:min(calc(100% - 24px),720px);
+  padding:15px 18px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#fff;
+  background:
+    linear-gradient(
+      135deg,
+      #b92f28,
+      #721212
+    );
+  border:3px solid #ffdf83;
+  border-radius:22px;
+  box-shadow:0 9px 28px rgba(57,11,7,.35);
+  transform:translateX(-50%);
+  text-align:center;
+  text-decoration:none;
+  font-size:20px;
+  font-weight:900;
+}
+
+.toast{
+  position:fixed;
+  left:50%;
+  bottom:100px;
+  z-index:200;
+  width:min(calc(100% - 40px),500px);
+  padding:14px 18px;
+  color:#fff;
+  background:rgba(45,33,24,.95);
+  border-radius:15px;
+  opacity:0;
+  pointer-events:none;
+  transform:translateX(-50%) translateY(30px);
+  transition:.25s;
+  text-align:center;
+  font-size:16px;
+  font-weight:800;
+}
+
+.toast.show{
+  opacity:1;
+  transform:translateX(-50%) translateY(0);
+}
+
+@media(min-width:640px){
+
+  .quick-nav{
+    grid-template-columns:repeat(4,1fr);
+  }
+
+  .menu-list{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .gallery{
+    grid-template-columns:repeat(3,1fr);
+  }
+
+  .gallery-item:first-child{
+    grid-column:auto;
+  }
+
+  .gallery-image,
+  .gallery-item:first-child .gallery-image{
+    height:220px;
+  }
+
+}
+
+</style>
 </head>
 
 <body>
+
 <div class="page">
 
-  <header class="topbar">
-    <img
-      class="topbar-logo smart-image"
-      data-sources="アプリアイコン.png|app-icon.png"
-      alt="長崎亭 お店応援DX"
-    >
+<header class="topbar">
 
-    <div class="topbar-text">
-      <h1 class="topbar-title">長崎亭</h1>
-      <p class="topbar-sub">地域のお店応援DX</p>
+  <img
+    class="topbar-logo"
+    src="アプリアイコン.png?v=4"
+    alt="長崎亭 お店応援DX"
+  >
+
+  <div>
+
+    <h1 class="topbar-title">
+      長崎亭
+    </h1>
+
+    <p class="topbar-sub">
+      地域のお店応援DX
+    </p>
+
+  </div>
+
+</header>
+
+<section class="hero">
+
+  <img
+    class="hero-image"
+    src="バナーメイン.png?v=4"
+    alt="長崎亭 創業1976年"
+  >
+
+  <div class="hero-message">
+
+    <strong>
+      志木で愛される、変わらない味
+    </strong>
+
+    <span>
+      お店の魅力や最新のお知らせを、地域のみんなで伝えるページです。
+    </span>
+
+  </div>
+
+</section>
+
+<nav class="quick-nav">
+
+  <a class="quick-button" href="#menu">
+    <span class="icon">🍜</span>
+    おすすめ
+  </a>
+
+  <a class="quick-button" href="#news">
+    <span class="icon">📢</span>
+    お知らせ
+  </a>
+
+  <a class="quick-button" href="#reviews">
+    <span class="icon">📷</span>
+    みんなの写真
+  </a>
+
+  <a class="quick-button" href="#access">
+    <span class="icon">📍</span>
+    アクセス
+  </a>
+
+</nav>
+
+<main>
+
+<section class="section">
+
+  <h2 class="section-heading">
+    🍵 店主から一言
+  </h2>
+
+  <div class="owner-box">
+
+    <p>
+      長崎亭は、1976年の創業以来、地域の皆さまに支えられながら、
+      昔ながらのちゃんぽんと皿うどんをお届けしてきました。
+      野菜をたっぷり使った温かい一杯を、どうぞゆっくりお楽しみください。
+    </p>
+
+    <div class="owner-sign">
+      長崎亭
     </div>
-  </header>
 
-  <section class="hero">
-    <img
-      class="hero-image smart-image"
-      data-sources="バナーメイン.png|banner-main.png"
-      alt="長崎亭 創業1976年 昔ながらのちゃんぽん・皿うどん"
-    >
+  </div>
 
-    <div class="hero-message">
-      <strong>志木で愛される、変わらない味</strong>
-      <span>
-        お店の魅力や最新のお知らせを、地域のみんなで伝えるページです。
-      </span>
-    </div>
-  </section>
+</section>
 
-  <nav class="quick-nav" aria-label="ページ内メニュー">
-    <a class="quick-button" href="#menu">
-      <span class="icon">🍜</span>
-      おすすめ
-    </a>
+<section class="section" id="menu">
 
-    <a class="quick-button" href="#news">
-      <span class="icon">📢</span>
-      お知らせ
-    </a>
+  <h2 class="section-heading">
+    🍜 おすすめメニュー
+  </h2>
 
-    <a class="quick-button" href="#photos">
-      <span class="icon">📷</span>
-      みんなの写真
-    </a>
+  <div class="menu-list">
 
-    <a class="quick-button" href="#access">
-      <span class="icon">📍</span>
-      アクセス
-    </a>
-  </nav>
-
-  <main>
-
-    <section class="section">
-      <h2 class="section-heading">
-        <span>🍵</span>
-        店主から一言
-      </h2>
-
-      <div class="owner-box">
-        <p>
-          長崎亭は、1976年の創業以来、地域の皆さまに支えられながら、
-          昔ながらのちゃんぽんと皿うどんをお届けしてきました。
-          野菜をたっぷり使った温かい一杯を、どうぞゆっくりお楽しみください。
-          お一人でも、ご家族でも、気軽にお立ち寄りいただけるお店です。
-        </p>
-
-        <div class="owner-sign">
-          長崎亭
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="menu">
-      <h2 class="section-heading">
-        <span>🍜</span>
-        おすすめメニュー
-      </h2>
-
-      <div class="menu-list">
-
-        <article class="menu-card">
-          <img
-            class="menu-image smart-image"
-            data-sources="menu-champon.png|ちゃんぽん.png"
-            alt="長崎亭のちゃんぽん"
-          >
-
-          <div class="menu-content">
-            <span class="menu-label">看板メニュー</span>
-
-            <h3 class="menu-name">
-              長崎ちゃんぽん
-            </h3>
-
-            <p class="menu-description">
-              キャベツ、もやし、かまぼこ、海鮮などの具材がたっぷり。
-              野菜の甘みと旨味が溶け込んだ、長崎亭を代表する一杯です。
-            </p>
-          </div>
-        </article>
-
-        <article class="menu-card">
-          <img
-            class="menu-image smart-image"
-            data-sources="menu-sauraudon.png|menu-saraudon.png|皿うどん.png"
-            alt="長崎亭の皿うどん"
-          >
-
-          <div class="menu-content">
-            <span class="menu-label">人気メニュー</span>
-
-            <h3 class="menu-name">
-              長崎皿うどん
-            </h3>
-
-            <p class="menu-description">
-              香ばしい麺の上に、野菜と海鮮の旨味を閉じ込めた
-              具だくさんのあんをたっぷり。食べ応えのある人気メニューです。
-            </p>
-          </div>
-        </article>
-
-      </div>
-    </section>
-
-    <section class="section" id="news">
-      <h2 class="section-heading">
-        <span>📢</span>
-        店主からのお知らせ
-      </h2>
-
-      <div class="news-list">
-
-        <article class="news-card">
-          <p class="news-date">最新情報</p>
-          <h3 class="news-title">
-            長崎亭のお店応援DXを準備中です
-          </h3>
-          <p class="news-text">
-            お店からのお知らせやおすすめ情報を、こちらで順次お届けします。
-          </p>
-        </article>
-
-        <article class="news-card">
-          <p class="news-date">営業案内</p>
-          <h3 class="news-title">
-            営業時間や臨時休業はFacebookでもご案内します
-          </h3>
-          <p class="news-text">
-            ご来店前に最新のお知らせをご確認ください。
-          </p>
-        </article>
-
-      </div>
-
-      <p class="notice">
-        ※今後、店主専用の操作ページから新しいお知らせを更新できるようにします。
-      </p>
-    </section>
-
-    <section class="section" id="photos">
-      <h2 class="section-heading">
-        <span>📷</span>
-        長崎亭の店内
-      </h2>
-
-      <p class="lead">
-        アンティーク時計と温かな照明に囲まれた、落ち着いた店内です。
-      </p>
-
-      <div class="gallery" style="margin-top:15px;">
-
-        <div class="gallery-item">
-          <img
-            class="gallery-image smart-image"
-            data-sources="shop-01.png"
-            alt="長崎亭の店内"
-          >
-        </div>
-
-        <div class="gallery-item">
-          <img
-            class="gallery-image smart-image"
-            data-sources="shop-02.png"
-            alt="アンティーク時計のある長崎亭の店内"
-          >
-        </div>
-
-        <div class="gallery-item">
-          <img
-            class="gallery-image smart-image"
-            data-sources="店の正面.png|shop-front.png"
-            alt="長崎亭の外観"
-          >
-        </div>
-
-      </div>
-    </section>
-
-    <section class="section" id="reviews">
-      <h2 class="section-heading">
-        <span>⭐</span>
-        みんなの写真・口コミ
-      </h2>
-
-      <p class="lead">
-        お客様が撮影した料理写真と、星評価・コメントを掲載するコーナーです。
-        投稿は確認後に公開します。
-      </p>
-
-      <div class="review-sample" style="margin-top:15px;">
-        <div class="review-stars" aria-label="星5つ">
-          ★★★★★
-        </div>
-
-        <p class="review-text">
-          ここにお客様の写真と応援コメントが表示されます。
-        </p>
-
-        <p class="review-name">
-          投稿見本
-        </p>
-
-        <p class="share-title">
-          この投稿を共有
-        </p>
-
-        <div class="share-row">
-          <button
-            class="share-button share-line"
-            type="button"
-            onclick="shareLine()"
-          >
-            LINE
-          </button>
-
-          <button
-            class="share-button share-x"
-            type="button"
-            onclick="shareX()"
-          >
-            X
-          </button>
-
-          <button
-            class="share-button share-facebook"
-            type="button"
-            onclick="shareFacebook()"
-          >
-            Facebook
-          </button>
-
-          <button
-            class="share-button share-copy"
-            type="button"
-            onclick="copyPageUrl()"
-          >
-            コピー
-          </button>
-        </div>
-      </div>
-
-      <a
-        class="primary-button"
-        href="post.html"
-        style="margin-top:16px;"
-      >
-        📷 写真・口コミを投稿する
-      </a>
-
-      <p class="notice">
-        カメラロールから写真を選び、星評価・コメント・ニックネームを投稿できる画面を次に作ります。
-      </p>
-    </section>
-
-    <section class="section" id="access">
-      <h2 class="section-heading">
-        <span>🏠</span>
-        店舗情報・アクセス
-      </h2>
+    <article class="menu-card">
 
       <img
-        class="shop-photo smart-image"
-        data-sources="店の正面.png|shop-front.png"
-        alt="長崎亭の店舗外観"
+        class="menu-image"
+        src="menu-champon.png"
+        alt="長崎亭の長崎ちゃんぽん"
+        onerror="this.src='menu-sauraudon.png'"
       >
 
-      <div class="info-table">
+      <div class="menu-content">
 
-        <div class="info-row">
-          <div class="info-label">店名</div>
-          <div class="info-value">長崎亭</div>
-        </div>
+        <span class="menu-label">
+          看板メニュー
+        </span>
 
-        <div class="info-row">
-          <div class="info-label">創業</div>
-          <div class="info-value">1976年</div>
-        </div>
+        <h3 class="menu-name">
+          長崎ちゃんぽん
+        </h3>
 
-        <div class="info-row">
-          <div class="info-label">住所</div>
-          <div class="info-value">
-            埼玉県志木市本町5-4-31
-          </div>
-        </div>
-
-        <div class="info-row">
-          <div class="info-label">電話</div>
-          <div class="info-value">
-            048-473-7998
-          </div>
-        </div>
-
-        <div class="info-row">
-          <div class="info-label">営業案内</div>
-          <div class="info-value">
-            営業時間・定休日・臨時休業は、最新のお知らせまたはFacebookをご確認ください。
-          </div>
-        </div>
+        <p class="menu-description">
+          野菜や海鮮の旨味が溶け込んだ、具だくさんの一杯です。
+        </p>
 
       </div>
 
-      <div class="button-stack" style="margin-top:16px;">
+    </article>
 
-        <a
-          class="map-button"
-          href="https://www.google.com/maps/dir/?api=1&destination=%E9%95%B7%E5%B4%8E%E4%BA%AD%20%E5%9F%BC%E7%8E%89%E7%9C%8C%E5%BF%97%E6%9C%A8%E5%B8%82%E6%9C%AC%E7%94%BA5-4-31"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          🧭 現在地から長崎亭へ案内
-        </a>
+    <article class="menu-card">
 
-        <a
-          class="phone-button"
-          href="tel:0484737998"
-        >
-          ☎ 長崎亭へ電話する
-        </a>
+      <img
+        class="menu-image"
+        src="menu-sauraudon.png"
+        alt="長崎亭の長崎皿うどん"
+      >
 
-        <a
-          class="facebook-button"
-          href="https://www.facebook.com/share/17fbEVdtby/?mibextid=wwXIfr"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Facebookで最新情報を見る
-        </a>
+      <div class="menu-content">
+
+        <span class="menu-label">
+          人気メニュー
+        </span>
+
+        <h3 class="menu-name">
+          長崎皿うどん
+        </h3>
+
+        <p class="menu-description">
+          香ばしい麺に、野菜と海鮮の具だくさんのあんをたっぷり。
+        </p>
 
       </div>
 
-      <div class="map-wrap">
-        <iframe
-          title="長崎亭のGoogleマップ"
-          loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"
-          src="https://www.google.com/maps?q=%E9%95%B7%E5%B4%8E%E4%BA%AD%20%E5%9F%BC%E7%8E%89%E7%9C%8C%E5%BF%97%E6%9C%A8%E5%B8%82%E6%9C%AC%E7%94%BA5-4-31&output=embed"
-        ></iframe>
-      </div>
-    </section>
+    </article>
 
-    <section class="section">
-      <h2 class="section-heading">
-        <span>📣</span>
-        長崎亭を応援しよう
-      </h2>
+  </div>
 
-      <p class="lead">
-        長崎亭のおいしさや店内の雰囲気を、家族や友人にも伝えてください。
-        皆さまの写真やコメントが、お店の応援につながります。
+</section>
+
+<section class="section" id="news">
+
+  <h2 class="section-heading">
+    📢 店主からのお知らせ
+  </h2>
+
+  <div class="news-list">
+
+    <article class="news-card">
+
+      <p class="news-date">
+        最新情報
       </p>
 
-      <button
-        class="secondary-button"
-        type="button"
-        onclick="shareSite()"
+      <h3 class="news-title">
+        長崎亭のお店応援DXを準備中です
+      </h3>
+
+      <p class="news-text">
+        お店からのお知らせやおすすめ情報を順次お届けします。
+      </p>
+
+    </article>
+
+  </div>
+
+</section>
+
+<section class="section">
+
+  <h2 class="section-heading">
+    🏠 長崎亭の店内
+  </h2>
+
+  <div class="gallery">
+
+    <div class="gallery-item">
+      <img
+        class="gallery-image"
+        src="shop-01.png"
+        alt="長崎亭の店内"
       >
-        📤 長崎亭のページを共有する
+    </div>
+
+    <div class="gallery-item">
+      <img
+        class="gallery-image"
+        src="shop-02.png"
+        alt="時計のある長崎亭の店内"
+      >
+    </div>
+
+    <div class="gallery-item">
+      <img
+        class="gallery-image"
+        src="店の正面.png"
+        alt="長崎亭の外観"
+      >
+    </div>
+
+  </div>
+
+</section>
+
+<section class="section" id="reviews">
+
+  <h2 class="section-heading">
+    ⭐ みんなの写真・口コミ
+  </h2>
+
+  <p class="lead">
+    お客様の写真、星評価、コメントを掲載するコーナーです。
+  </p>
+
+  <div class="review-sample" style="margin-top:15px;">
+
+    <div class="review-stars">
+      ★★★★★
+    </div>
+
+    <p class="review-text">
+      ここにお客様の写真と応援コメントが表示されます。
+    </p>
+
+    <p class="review-name">
+      投稿見本
+    </p>
+
+    <p class="share-title">
+      この投稿を共有
+    </p>
+
+    <div class="share-row">
+
+      <button
+        class="share-button share-line"
+        type="button"
+        onclick="shareLine()"
+      >
+        LINE
       </button>
-    </section>
 
-  </main>
+      <button
+        class="share-button share-x"
+        type="button"
+        onclick="shareX()"
+      >
+        X
+      </button>
 
-  <footer class="footer">
-    <p class="footer-title">
-      長崎亭
-    </p>
+      <button
+        class="share-button share-facebook"
+        type="button"
+        onclick="shareFacebook()"
+      >
+        Facebook
+      </button>
 
-    <p class="footer-text">
-      埼玉県志木市本町5-4-31<br>
-      電話 048-473-7998
-    </p>
+      <button
+        class="share-button share-copy"
+        type="button"
+        onclick="copyPageUrl()"
+      >
+        コピー
+      </button>
 
-    <p class="footer-text">
-      地域のお店応援DX　第1号店舗
-    </p>
+    </div>
+
+  </div>
+
+  <a
+    class="primary-button"
+    href="post.html"
+    style="margin-top:16px;"
+  >
+    📷 写真・口コミを投稿する
+  </a>
+
+</section>
+
+<section class="section" id="access">
+
+  <h2 class="section-heading">
+    📍 店舗情報・アクセス
+  </h2>
+
+  <img
+    class="shop-photo"
+    src="店の正面.png"
+    alt="長崎亭の外観"
+  >
+
+  <div class="info-table">
+
+    <div class="info-row">
+      <div class="info-label">店名</div>
+      <div class="info-value">長崎亭</div>
+    </div>
+
+    <div class="info-row">
+      <div class="info-label">創業</div>
+      <div class="info-value">1976年</div>
+    </div>
+
+    <div class="info-row">
+      <div class="info-label">住所</div>
+      <div class="info-value">埼玉県志木市本町5-4-31</div>
+    </div>
+
+    <div class="info-row">
+      <div class="info-label">電話</div>
+      <div class="info-value">048-473-7998</div>
+    </div>
+
+  </div>
+
+  <div class="button-stack" style="margin-top:16px;">
 
     <a
-      class="footer-admin"
-      href="admin.html"
+      class="map-button"
+      href="https://www.google.com/maps/dir/?api=1&destination=%E9%95%B7%E5%B4%8E%E4%BA%AD%20%E5%9F%BC%E7%8E%89%E7%9C%8C%E5%BF%97%E6%9C%A8%E5%B8%82%E6%9C%AC%E7%94%BA5-4-31"
+      target="_blank"
+      rel="noopener"
     >
-      店主・管理者ページ
+      🧭 現在地から長崎亭へ案内
     </a>
-  </footer>
+
+    <a
+      class="phone-button"
+      href="tel:0484737998"
+    >
+      ☎ 長崎亭へ電話する
+    </a>
+
+    <a
+      class="facebook-button"
+      href="https://www.facebook.com/share/17fbEVdtby/?mibextid=wwXIfr"
+      target="_blank"
+      rel="noopener"
+    >
+      Facebookで最新情報を見る
+    </a>
+
+  </div>
+
+  <div class="map-wrap">
+
+    <iframe
+      title="長崎亭のGoogleマップ"
+      loading="lazy"
+      src="https://www.google.com/maps?q=%E9%95%B7%E5%B4%8E%E4%BA%AD%20%E5%9F%BC%E7%8E%89%E7%9C%8C%E5%BF%97%E6%9C%A8%E5%B8%82%E6%9C%AC%E7%94%BA5-4-31&output=embed"
+    ></iframe>
+
+  </div>
+
+</section>
+
+<section class="section">
+
+  <h2 class="section-heading">
+    📣 長崎亭を応援しよう
+  </h2>
+
+  <p class="lead">
+    長崎亭のおいしさや店内の雰囲気を、家族や友人にも伝えてください。
+  </p>
+
+  <button
+    class="secondary-button"
+    type="button"
+    onclick="shareSite()"
+  >
+    📤 長崎亭のページを共有する
+  </button>
+
+</section>
+
+</main>
+
+<footer class="footer">
+
+  <p class="footer-title">
+    長崎亭
+  </p>
+
+  <p class="footer-text">
+    埼玉県志木市本町5-4-31<br>
+    電話 048-473-7998
+  </p>
+
+  <p class="footer-text">
+    地域のお店応援DX　第1号店舗
+  </p>
+
+</footer>
 
 </div>
 
@@ -1137,179 +1210,138 @@
 <div
   class="toast"
   id="toast"
-  role="status"
-  aria-live="polite"
 ></div>
 
 <script>
-  const SITE_TITLE =
-    "長崎亭｜地域のお店応援DX";
 
-  const SHARE_TEXT =
-    "志木市の老舗・長崎亭を地域のみんなで応援するページです。";
+const SITE_URL =
+  "https://ichirohns-jpg.github.io/nagasakitei-shop-dx/";
 
-  function initializeSmartImages() {
-    const images =
-      document.querySelectorAll(".smart-image");
+const SHARE_TEXT =
+  "志木市の老舗・長崎亭を地域のみんなで応援するページです。";
 
-    images.forEach((image) => {
-      const sourceText =
-        image.dataset.sources || "";
+function shareLine(){
 
-      const sources =
-        sourceText
-          .split("|")
-          .map((source) => source.trim())
-          .filter(Boolean);
-
-      let currentIndex = 0;
-
-      function loadNextImage() {
-        if (currentIndex >= sources.length) {
-          image.classList.add("image-hidden");
-          return;
-        }
-
-        image.src =
-          sources[currentIndex];
-
-        currentIndex += 1;
-      }
-
-      image.addEventListener(
-        "error",
-        loadNextImage
-      );
-
-      loadNextImage();
-    });
-  }
-
-  function getPageUrl() {
-    return window.location.href
-      .split("#")[0];
-  }
-
-  function showToast(message) {
-    const toast =
-      document.getElementById("toast");
-
-    toast.textContent = message;
-    toast.classList.add("show");
-
-    window.clearTimeout(
-      showToast.timer
+  const text =
+    encodeURIComponent(
+      SHARE_TEXT +
+      "\n" +
+      SITE_URL
     );
 
-    showToast.timer =
-      window.setTimeout(() => {
-        toast.classList.remove("show");
-      }, 2300);
-  }
+  window.open(
+    "https://line.me/R/msg/text/?" +
+    text,
+    "_blank"
+  );
 
-  function shareLine() {
-    const url =
-      encodeURIComponent(
-        getPageUrl()
-      );
+}
 
-    const text =
-      encodeURIComponent(
-        SHARE_TEXT
-      );
+function shareX(){
 
-    window.open(
-      "https://line.me/R/msg/text/?" +
-      text +
-      "%0A" +
-      url,
-      "_blank",
-      "noopener,noreferrer"
+  window.open(
+    "https://twitter.com/intent/tweet?text=" +
+    encodeURIComponent(SHARE_TEXT) +
+    "&url=" +
+    encodeURIComponent(SITE_URL),
+    "_blank"
+  );
+
+}
+
+function shareFacebook(){
+
+  window.open(
+    "https://www.facebook.com/sharer/sharer.php?u=" +
+    encodeURIComponent(SITE_URL),
+    "_blank"
+  );
+
+}
+
+async function copyPageUrl(){
+
+  try{
+
+    await navigator.clipboard.writeText(
+      SITE_URL
     );
-  }
 
-  function shareX() {
-    const url =
-      encodeURIComponent(
-        getPageUrl()
-      );
-
-    const text =
-      encodeURIComponent(
-        SHARE_TEXT
-      );
-
-    window.open(
-      "https://twitter.com/intent/tweet?text=" +
-      text +
-      "&url=" +
-      url,
-      "_blank",
-      "noopener,noreferrer"
+    showToast(
+      "リンクをコピーしました"
     );
-  }
 
-  function shareFacebook() {
-    const url =
-      encodeURIComponent(
-        getPageUrl()
-      );
+  }catch(error){
 
-    window.open(
-      "https://www.facebook.com/sharer/sharer.php?u=" +
-      url,
-      "_blank",
-      "noopener,noreferrer"
+    window.prompt(
+      "このリンクをコピーしてください",
+      SITE_URL
     );
+
   }
 
-  async function copyPageUrl() {
-    const url =
-      getPageUrl();
+}
 
-    try {
-      await navigator.clipboard.writeText(
-        url
-      );
+async function shareSite(){
 
-      showToast(
-        "リンクをコピーしました"
-      );
-    } catch (error) {
-      window.prompt(
-        "このリンクをコピーしてください",
-        url
-      );
-    }
-  }
+  if(navigator.share){
 
-  async function shareSite() {
-    const shareData = {
-      title: SITE_TITLE,
-      text: SHARE_TEXT,
-      url: getPageUrl()
-    };
+    try{
 
-    if (navigator.share) {
-      try {
-        await navigator.share(
-          shareData
-        );
+      await navigator.share({
+        title:"長崎亭｜地域のお店応援DX",
+        text:SHARE_TEXT,
+        url:SITE_URL
+      });
+
+      return;
+
+    }catch(error){
+
+      if(
+        error &&
+        error.name === "AbortError"
+      ){
         return;
-      } catch (error) {
-        if (
-          error &&
-          error.name === "AbortError"
-        ) {
-          return;
-        }
       }
+
     }
 
-    await copyPageUrl();
   }
 
-  initializeSmartImages();
+  await copyPageUrl();
+
+}
+
+function showToast(message){
+
+  const toast =
+    document.getElementById(
+      "toast"
+    );
+
+  toast.textContent =
+    message;
+
+  toast.classList.add(
+    "show"
+  );
+
+  clearTimeout(
+    showToast.timer
+  );
+
+  showToast.timer =
+    setTimeout(function(){
+
+      toast.classList.remove(
+        "show"
+      );
+
+    },2200);
+
+}
+
 </script>
 
 </body>
