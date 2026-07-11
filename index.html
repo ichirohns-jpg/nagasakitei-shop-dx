@@ -61,12 +61,6 @@
   href="app-icon.png?v=5"
 >
 
-<link
-  rel="apple-touch-icon"
-  sizes="180x180"
-  href="app-icon.png?v=5"
->
-
 <meta property="og:type" content="website">
 
 <meta
@@ -91,12 +85,12 @@
 
 <meta
   property="og:image"
-  content="https://ichirohns-jpg.github.io/nagasakitei-shop-dx/banner-main.png?v=5"
+  content="https://ichirohns-jpg.github.io/nagasakitei-shop-dx/banner-main.png?v=6"
 >
 
 <meta
   property="og:image:secure_url"
-  content="https://ichirohns-jpg.github.io/nagasakitei-shop-dx/banner-main.png?v=5"
+  content="https://ichirohns-jpg.github.io/nagasakitei-shop-dx/banner-main.png?v=6"
 >
 
 <meta
@@ -136,7 +130,7 @@
 
 <meta
   name="twitter:image"
-  content="https://ichirohns-jpg.github.io/nagasakitei-shop-dx/banner-main.png?v=5"
+  content="https://ichirohns-jpg.github.io/nagasakitei-shop-dx/banner-main.png?v=6"
 >
 
 <style>
@@ -144,11 +138,8 @@
 :root{
   --wine:#7b1717;
   --wine-dark:#4d0d0d;
-  --wine-light:#a62a24;
   --cream:#fff8e8;
-  --cream-dark:#f3e3bd;
   --yellow:#f6c85f;
-  --brown:#4b2a18;
   --green:#287a45;
   --blue:#146aa3;
   --text:#2d2118;
@@ -228,10 +219,9 @@ a{
   display:flex;
   align-items:center;
   gap:12px;
-  color:var(--white);
+  color:#fff;
   background:rgba(83,14,14,.97);
   border-bottom:3px solid var(--yellow);
-  backdrop-filter:blur(10px);
 }
 
 .topbar-logo{
@@ -271,7 +261,6 @@ a{
 
 .hero-message{
   padding:18px 18px 20px;
-  text-align:center;
   color:#fff;
   background:
     linear-gradient(
@@ -281,13 +270,13 @@ a{
       #953120
     );
   border-top:3px solid var(--yellow);
+  text-align:center;
 }
 
 .hero-message strong{
   display:block;
   color:#fff3c7;
   font-size:24px;
-  line-height:1.45;
 }
 
 .hero-message span{
@@ -378,7 +367,6 @@ main{
 
 .owner-box p{
   margin:0;
-  line-height:1.9;
 }
 
 .owner-sign{
@@ -432,19 +420,24 @@ main{
 .menu-description{
   margin:8px 0 0;
   font-size:17px;
-  line-height:1.8;
 }
 
-.news-list{
+.news-list,
+.review-list{
   display:grid;
-  gap:13px;
+  gap:14px;
+}
+
+.news-card,
+.review-card{
+  padding:16px;
+  background:#fff9eb;
+  border:1px solid #ead39e;
+  border-radius:18px;
 }
 
 .news-card{
-  padding:15px;
-  background:#fff9eb;
   border-left:7px solid var(--wine);
-  border-radius:17px;
 }
 
 .news-date{
@@ -457,22 +450,79 @@ main{
 .news-title{
   margin:0;
   color:var(--wine-dark);
-  font-size:19px;
+  font-size:20px;
   font-weight:900;
 }
 
-.news-text{
-  margin:6px 0 0;
-  font-size:16px;
+.news-text,
+.review-text{
+  margin:8px 0 0;
+  white-space:pre-wrap;
+  overflow-wrap:anywhere;
 }
 
-.notice{
-  margin-top:13px;
-  padding:12px;
-  color:#655a50;
+.dynamic-message{
+  padding:18px 14px;
+  color:var(--gray);
   background:#f8f3e8;
-  border-radius:14px;
+  border-radius:15px;
+  text-align:center;
   font-size:15px;
+  font-weight:800;
+}
+
+.media-scroll{
+  margin-top:13px;
+  display:flex;
+  gap:10px;
+  overflow-x:auto;
+  scroll-snap-type:x mandatory;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:none;
+}
+
+.media-scroll::-webkit-scrollbar{
+  display:none;
+}
+
+.media-item{
+  min-width:86%;
+  overflow:hidden;
+  scroll-snap-align:start;
+  background:#eadfc8;
+  border:1px solid var(--border);
+  border-radius:15px;
+}
+
+.media-image{
+  width:100%;
+  height:310px;
+  object-fit:cover;
+}
+
+.news-link-row{
+  margin-top:12px;
+  display:grid;
+  gap:8px;
+}
+
+.news-link-button{
+  min-height:52px;
+  padding:11px 14px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#fff;
+  background:var(--blue);
+  border-radius:14px;
+  text-align:center;
+  text-decoration:none;
+  font-size:15px;
+  font-weight:900;
+}
+
+.news-link-button.external{
+  background:var(--green);
 }
 
 .gallery{
@@ -502,25 +552,14 @@ main{
   height:250px;
 }
 
-.review-sample{
-  padding:16px;
-  background:#fff9eb;
-  border:1px solid #ead39e;
-  border-radius:18px;
-}
-
 .review-stars{
   color:#e09a00;
   font-size:27px;
   letter-spacing:2px;
 }
 
-.review-text{
-  margin:8px 0;
-}
-
 .review-name{
-  margin:0;
+  margin:7px 0 0;
   color:var(--gray);
   font-size:14px;
   font-weight:800;
@@ -771,11 +810,6 @@ main{
     grid-column:auto;
   }
 
-  .gallery-image,
-  .gallery-item:first-child .gallery-image{
-    height:220px;
-  }
-
 }
 
 </style>
@@ -794,15 +828,8 @@ main{
   >
 
   <div>
-
-    <h1 class="topbar-title">
-      長崎亭
-    </h1>
-
-    <p class="topbar-sub">
-      地域のお店応援DX
-    </p>
-
+    <h1 class="topbar-title">長崎亭</h1>
+    <p class="topbar-sub">地域のお店応援DX</p>
   </div>
 
 </header>
@@ -811,7 +838,7 @@ main{
 
   <img
     class="hero-image"
-    src="banner-main.png?v=5"
+    src="banner-main.png?v=6"
     alt="長崎亭 創業1976年"
   >
 
@@ -891,7 +918,7 @@ main{
         class="menu-image"
         src="menu-champon.png"
         alt="長崎亭の長崎ちゃんぽん"
-        onerror="this.src='menu-saraudon.png'"
+        onerror="this.onerror=null;this.src='menu-saraudon.png'"
       >
 
       <div class="menu-content">
@@ -948,24 +975,13 @@ main{
     📢 店主からのお知らせ
   </h2>
 
-  <div class="news-list">
-
-    <article class="news-card">
-
-      <p class="news-date">
-        最新情報
-      </p>
-
-      <h3 class="news-title">
-        長崎亭のお店応援DXを準備中です
-      </h3>
-
-      <p class="news-text">
-        お店からのお知らせやおすすめ情報を順次お届けします。
-      </p>
-
-    </article>
-
+  <div
+    class="news-list"
+    id="newsList"
+  >
+    <div class="dynamic-message">
+      お知らせを読み込んでいます…
+    </div>
   </div>
 
 </section>
@@ -1013,63 +1029,16 @@ main{
   </h2>
 
   <p class="lead">
-    お客様の写真、星評価、コメントを掲載するコーナーです。
+    管理者が公開したお客様の写真、星評価、コメントを掲載しています。
   </p>
 
-  <div class="review-sample" style="margin-top:15px;">
-
-    <div class="review-stars">
-      ★★★★★
+  <div
+    class="review-list"
+    id="reviewList"
+  >
+    <div class="dynamic-message">
+      写真・口コミを読み込んでいます…
     </div>
-
-    <p class="review-text">
-      ここにお客様の写真と応援コメントが表示されます。
-    </p>
-
-    <p class="review-name">
-      投稿見本
-    </p>
-
-    <p class="share-title">
-      この投稿を共有
-    </p>
-
-    <div class="share-row">
-
-      <button
-        class="share-button share-line"
-        type="button"
-        onclick="shareLine()"
-      >
-        LINE
-      </button>
-
-      <button
-        class="share-button share-x"
-        type="button"
-        onclick="shareX()"
-      >
-        X
-      </button>
-
-      <button
-        class="share-button share-facebook"
-        type="button"
-        onclick="shareFacebook()"
-      >
-        Facebook
-      </button>
-
-      <button
-        class="share-button share-copy"
-        type="button"
-        onclick="copyPageUrl()"
-      >
-        コピー
-      </button>
-
-    </div>
-
   </div>
 
   <a
@@ -1196,6 +1165,13 @@ main{
     地域のお店応援DX　第1号店舗
   </p>
 
+  <a
+    class="footer-admin"
+    href="admin.html"
+  >
+    管理者画面
+  </a>
+
 </footer>
 
 </div>
@@ -1214,52 +1190,663 @@ main{
 
 <script>
 
+const GAS_URL =
+  "https://script.google.com/macros/s/AKfycbz77QIYPX0z4er8nRAMhP5FK3E3xB1ib0pPObaSIEbj99Z7dK4BZ-q5H5SQ0MX7p_tm4Q/exec";
+
 const SITE_URL =
   "https://ichirohns-jpg.github.io/nagasakitei-shop-dx/";
 
 const SHARE_TEXT =
   "志木市の老舗・長崎亭を地域のみんなで応援するページです。";
 
-function shareLine(){
+let publicNewsItems = [];
+let publicPostItems = [];
 
-  const text =
-    encodeURIComponent(
-      SHARE_TEXT +
-      "\n" +
-      SITE_URL
+const newsList =
+  document.getElementById(
+    "newsList"
+  );
+
+const reviewList =
+  document.getElementById(
+    "reviewList"
+  );
+
+newsList.addEventListener(
+  "click",
+  handleItemShare
+);
+
+reviewList.addEventListener(
+  "click",
+  handleItemShare
+);
+
+loadPublicNews();
+loadPublicPosts();
+
+
+async function loadPublicNews(){
+
+  try{
+
+    const result =
+      await fetchJson(
+        GAS_URL +
+        "?mode=publicNews&limit=5"
+      );
+
+    publicNewsItems =
+      Array.isArray(result.news)
+        ? result.news.map(normalizeNews)
+        : [];
+
+    renderNews();
+
+  }catch(error){
+
+    newsList.innerHTML =
+      '<div class="dynamic-message">お知らせを読み込めませんでした。</div>';
+
+  }
+
+}
+
+
+async function loadPublicPosts(){
+
+  try{
+
+    const result =
+      await fetchJson(
+        GAS_URL +
+        "?mode=publicPosts&limit=20"
+      );
+
+    publicPostItems =
+      Array.isArray(result.posts)
+        ? result.posts.map(normalizePost)
+        : [];
+
+    renderPosts();
+
+  }catch(error){
+
+    reviewList.innerHTML =
+      '<div class="dynamic-message">写真・口コミを読み込めませんでした。</div>';
+
+  }
+
+}
+
+
+async function fetchJson(url){
+
+  const response =
+    await fetch(
+      url,
+      {
+        method:"GET",
+        redirect:"follow",
+        cache:"no-store"
+      }
     );
 
-  window.open(
-    "https://line.me/R/msg/text/?" +
+  if(!response.ok){
+
+    throw new Error(
+      "通信エラー"
+    );
+
+  }
+
+  const result =
+    await response.json();
+
+  if(
+    !result ||
+    result.success !== true
+  ){
+
+    throw new Error(
+      result && result.message
+        ? result.message
+        : "取得エラー"
+    );
+
+  }
+
+  return result;
+
+}
+
+
+function normalizeNews(item){
+
+  return{
+    id:String(item.id || ""),
+    date:String(item.date || ""),
+    title:String(item.title || ""),
+    body:String(item.body || ""),
+
+    images:
+      Array.isArray(item.images)
+        ? item.images
+            .map(safeUrl)
+            .filter(Boolean)
+            .slice(0,5)
+        : [],
+
+    videoUrl:
+      safeUrl(item.videoUrl),
+
+    externalUrl:
+      safeUrl(item.externalUrl)
+  };
+
+}
+
+
+function normalizePost(item){
+
+  return{
+    id:String(item.id || ""),
+    date:String(item.date || ""),
+    nickname:String(
+      item.nickname || "投稿者"
+    ),
+
+    rating:
+      Math.max(
+        0,
+        Math.min(
+          5,
+          Number(item.rating) || 0
+        )
+      ),
+
+    comment:String(item.comment || ""),
+    menuName:String(item.menuName || ""),
+
+    images:
+      Array.isArray(item.images)
+        ? item.images
+            .map(safeUrl)
+            .filter(Boolean)
+            .slice(0,5)
+        : []
+  };
+
+}
+
+
+function renderNews(){
+
+  if(
+    publicNewsItems.length === 0
+  ){
+
+    newsList.innerHTML =
+      '<div class="dynamic-message">現在、新しいお知らせはありません。</div>';
+
+    return;
+
+  }
+
+  newsList.innerHTML =
+    publicNewsItems.map(
+      function(item){
+
+        const images =
+          renderMediaImages(
+            item.images,
+            item.title
+          );
+
+        const links = [];
+
+        if(item.videoUrl){
+
+          links.push(`
+            <a
+              class="news-link-button"
+              href="${escapeAttribute(item.videoUrl)}"
+              target="_blank"
+              rel="noopener"
+            >
+              ▶ 動画を見る
+            </a>
+          `);
+
+        }
+
+        if(item.externalUrl){
+
+          links.push(`
+            <a
+              class="news-link-button external"
+              href="${escapeAttribute(item.externalUrl)}"
+              target="_blank"
+              rel="noopener"
+            >
+              詳しい情報を見る
+            </a>
+          `);
+
+        }
+
+        return `
+          <article class="news-card">
+
+            <p class="news-date">
+              ${escapeHtml(item.date)}
+            </p>
+
+            <h3 class="news-title">
+              ${escapeHtml(item.title)}
+            </h3>
+
+            <p class="news-text">${escapeHtml(item.body)}</p>
+
+            ${images}
+
+            ${
+              links.length
+                ? `<div class="news-link-row">${links.join("")}</div>`
+                : ""
+            }
+
+            ${renderShareButtons("news",item.id)}
+
+          </article>
+        `;
+
+      }
+    ).join("");
+
+}
+
+
+function renderPosts(){
+
+  if(
+    publicPostItems.length === 0
+  ){
+
+    reviewList.innerHTML =
+      '<div class="dynamic-message">公開中の写真・口コミはまだありません。</div>';
+
+    return;
+
+  }
+
+  reviewList.innerHTML =
+    publicPostItems.map(
+      function(item){
+
+        const images =
+          renderMediaImages(
+            item.images,
+            item.menuName ||
+            "長崎亭の投稿写真"
+          );
+
+        return `
+          <article class="review-card">
+
+            <div class="review-stars">
+              ${"★".repeat(item.rating)}${"☆".repeat(5-item.rating)}
+            </div>
+
+            ${
+              item.menuName
+                ? `<span class="menu-label">${escapeHtml(item.menuName)}</span>`
+                : ""
+            }
+
+            <p class="review-text">${escapeHtml(item.comment)}</p>
+
+            <p class="review-name">
+              ${escapeHtml(item.nickname)}・${escapeHtml(item.date)}
+            </p>
+
+            ${images}
+
+            ${renderShareButtons("post",item.id)}
+
+          </article>
+        `;
+
+      }
+    ).join("");
+
+}
+
+
+function renderMediaImages(
+  images,
+  altText
+){
+
+  if(
+    !images ||
+    images.length === 0
+  ){
+
+    return "";
+
+  }
+
+  return `
+    <div class="media-scroll">
+      ${
+        images.map(
+          function(url,index){
+
+            return `
+              <a
+                class="media-item"
+                href="${escapeAttribute(url)}"
+                target="_blank"
+                rel="noopener"
+              >
+                <img
+                  class="media-image"
+                  src="${escapeAttribute(url)}"
+                  alt="${escapeAttribute(altText)} ${index + 1}"
+                  loading="lazy"
+                >
+              </a>
+            `;
+
+          }
+        ).join("")
+      }
+    </div>
+  `;
+
+}
+
+
+function renderShareButtons(
+  itemType,
+  itemId
+){
+
+  return `
+    <p class="share-title">
+      この情報を共有
+    </p>
+
+    <div class="share-row">
+
+      <button
+        class="share-button share-line"
+        type="button"
+        data-item-type="${escapeAttribute(itemType)}"
+        data-item-id="${escapeAttribute(itemId)}"
+        data-platform="line"
+      >
+        LINE
+      </button>
+
+      <button
+        class="share-button share-x"
+        type="button"
+        data-item-type="${escapeAttribute(itemType)}"
+        data-item-id="${escapeAttribute(itemId)}"
+        data-platform="x"
+      >
+        X
+      </button>
+
+      <button
+        class="share-button share-facebook"
+        type="button"
+        data-item-type="${escapeAttribute(itemType)}"
+        data-item-id="${escapeAttribute(itemId)}"
+        data-platform="facebook"
+      >
+        Facebook
+      </button>
+
+      <button
+        class="share-button share-copy"
+        type="button"
+        data-item-type="${escapeAttribute(itemType)}"
+        data-item-id="${escapeAttribute(itemId)}"
+        data-platform="copy"
+      >
+        コピー
+      </button>
+
+    </div>
+  `;
+
+}
+
+
+function handleItemShare(event){
+
+  const button =
+    event.target.closest(
+      "[data-platform]"
+    );
+
+  if(!button){
+    return;
+  }
+
+  const itemType =
+    button.dataset.itemType;
+
+  const itemId =
+    button.dataset.itemId;
+
+  let title =
+    "長崎亭｜地域のお店応援DX";
+
+  let text =
+    SHARE_TEXT;
+
+  let url =
+    SITE_URL;
+
+  if(itemType === "news"){
+
+    const item =
+      publicNewsItems.find(
+        function(news){
+          return news.id === itemId;
+        }
+      );
+
+    if(item){
+
+      title =
+        item.title;
+
+      text =
+        item.title +
+        "\n" +
+        item.body;
+
+      url =
+        SITE_URL +
+        "#news";
+
+    }
+
+  }
+
+  if(itemType === "post"){
+
+    const item =
+      publicPostItems.find(
+        function(post){
+          return post.id === itemId;
+        }
+      );
+
+    if(item){
+
+      title =
+        "長崎亭のお客様口コミ";
+
+      text =
+        item.nickname +
+        "さんの口コミ\n" +
+        item.comment;
+
+      url =
+        SITE_URL +
+        "#reviews";
+
+    }
+
+  }
+
+  shareContent(
+    button.dataset.platform,
+    title,
     text,
-    "_blank"
+    url
   );
 
 }
 
-function shareX(){
 
-  window.open(
-    "https://twitter.com/intent/tweet?text=" +
-    encodeURIComponent(SHARE_TEXT) +
-    "&url=" +
-    encodeURIComponent(SITE_URL),
-    "_blank"
-  );
+async function shareContent(
+  platform,
+  title,
+  text,
+  url
+){
+
+  if(platform === "line"){
+
+    window.open(
+      "https://line.me/R/msg/text/?" +
+      encodeURIComponent(
+        text +
+        "\n" +
+        url
+      ),
+      "_blank"
+    );
+
+    return;
+
+  }
+
+  if(platform === "x"){
+
+    window.open(
+      "https://twitter.com/intent/tweet?text=" +
+      encodeURIComponent(text) +
+      "&url=" +
+      encodeURIComponent(url),
+      "_blank"
+    );
+
+    return;
+
+  }
+
+  if(platform === "facebook"){
+
+    if(navigator.share){
+
+      try{
+
+        await navigator.share({
+          title:title,
+          text:text,
+          url:url
+        });
+
+        return;
+
+      }catch(error){
+
+        if(
+          error &&
+          error.name === "AbortError"
+        ){
+          return;
+        }
+
+      }
+
+    }
+
+    window.open(
+      "https://www.facebook.com/sharer/sharer.php?u=" +
+      encodeURIComponent(url),
+      "_blank"
+    );
+
+    return;
+
+  }
+
+  try{
+
+    await navigator.clipboard.writeText(
+      text +
+      "\n" +
+      url
+    );
+
+    showToast(
+      "文章とリンクをコピーしました"
+    );
+
+  }catch(error){
+
+    window.prompt(
+      "この文章をコピーしてください",
+      text +
+      "\n" +
+      url
+    );
+
+  }
 
 }
 
-function shareFacebook(){
 
-  window.open(
-    "https://www.facebook.com/sharer/sharer.php?u=" +
-    encodeURIComponent(SITE_URL),
-    "_blank"
-  );
+async function shareSite(){
 
-}
+  if(navigator.share){
 
-async function copyPageUrl(){
+    try{
+
+      await navigator.share({
+        title:
+          "長崎亭｜地域のお店応援DX",
+
+        text:
+          SHARE_TEXT,
+
+        url:
+          SITE_URL
+      });
+
+      return;
+
+    }catch(error){
+
+      if(
+        error &&
+        error.name === "AbortError"
+      ){
+        return;
+      }
+
+    }
+
+  }
 
   try{
 
@@ -1282,36 +1869,6 @@ async function copyPageUrl(){
 
 }
 
-async function shareSite(){
-
-  if(navigator.share){
-
-    try{
-
-      await navigator.share({
-        title:"長崎亭｜地域のお店応援DX",
-        text:SHARE_TEXT,
-        url:SITE_URL
-      });
-
-      return;
-
-    }catch(error){
-
-      if(
-        error &&
-        error.name === "AbortError"
-      ){
-        return;
-      }
-
-    }
-
-  }
-
-  await copyPageUrl();
-
-}
 
 function showToast(message){
 
@@ -1332,13 +1889,53 @@ function showToast(message){
   );
 
   showToast.timer =
-    setTimeout(function(){
+    setTimeout(
+      function(){
 
-      toast.classList.remove(
-        "show"
-      );
+        toast.classList.remove(
+          "show"
+        );
 
-    },2200);
+      },
+      2200
+    );
+
+}
+
+
+function safeUrl(value){
+
+  const url =
+    String(
+      value || ""
+    ).trim();
+
+  return /^https?:\/\//i.test(url)
+    ? url
+    : "";
+
+}
+
+
+function escapeHtml(value){
+
+  return String(
+    value || ""
+  )
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+
+function escapeAttribute(value){
+
+  return escapeHtml(
+    value
+  );
 
 }
 
